@@ -1,0 +1,12 @@
+{
+    "templates": [
+        {
+            "id": "default",
+            "description": "Default simple template"
+        },
+        {
+            "id": "classic",
+            "description": "A classic template with a header and footer"
+        }
+    ]
+}

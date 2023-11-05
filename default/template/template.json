@@ -1,0 +1,14 @@
+{
+    "id": "default",
+    "description": "Default simple template",
+    "baseTheme": "${theme}",
+    "properties": {
+        "theme": {
+            "description": "Base Reveal.js theme",
+            "default": "white"
+        }
+    },
+    "slideClasses": [ "normal" ],
+    "defaultClass": "normal",
+    "styles": [ "googlecode.css" ]
+}
