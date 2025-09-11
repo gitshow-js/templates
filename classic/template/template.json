@@ -11,6 +11,7 @@
     "defaultClass": "normal",
     "baseTheme": "sky",
     "styles": [ "classic.css", "googlecode.css" ],
+    "usePlugins": [ "mathjax2", "rewrite" ],
     "reveal": {
         "width": 1920,
         "height": 1080,
