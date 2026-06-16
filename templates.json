@@ -12,14 +12,6 @@
         {
             "id": "hightech",
             "description": "High-tech light template for technical and engineering talks"
-        },
-        {
-            "id": "fit_v3",
-            "description": "FIT BUT high-tech template for conference and engineering talks"
-        },
-        {
-            "id": "fit_v4",
-            "description": "FIT BUT template for internal academic presentations and study statistics"
         }
     ]
 }
