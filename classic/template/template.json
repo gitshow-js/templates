@@ -7,8 +7,10 @@
             "default": ""
         }
     },
-    "slideClasses": [ "normal" ],
+    "slideClasses": [ "normal", "title", "section", "quote" ],
     "defaultClass": "normal",
+    "slideModifiers": [ "centered", "fullspace" ],
+    "contentClasses": [ "col", "img-right", "box", "note", "large", "small", "grey", "minus", "plus", "cite", "shadow", "r-ref", "r-refs" ],
     "baseTheme": "sky",
     "styles": [ "classic.css", "googlecode.css" ],
     "usePlugins": [ "mathjax2", "rewrite" ],
