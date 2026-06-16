@@ -1,0 +1,20 @@
+{
+    "id": "pitch_sample",
+    "title": "Nimbus — Seed Round",
+    "author": "Mara Velasco <mara@nimbus.so>",
+    "lang": "en",
+    "template": {
+        "name": "pitch",
+        "properties": {
+            "footer": "Nimbus — Seed Round 2026"
+        }
+    },
+    "contents": [
+        "00title.md",
+        "10problem.md",
+        "20solution.md",
+        "30market.md",
+        "40ask.md",
+        "99final.md"
+    ]
+}

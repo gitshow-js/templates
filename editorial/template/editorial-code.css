@@ -1,0 +1,74 @@
+/* editorial-code.css — restrained print-ink syntax highlighting
+   (ink body · crimson keywords · slate literals · muted comments) */
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: transparent;
+  color: #2c2620;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #9a9085;          /* faint warm grey */
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-addition {
+  color: #c1121f;          /* crimson — keywords */
+  font-weight: 600;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-regexp {
+  color: #50606b;          /* slate */
+}
+
+.hljs-string,
+.hljs-meta .hljs-meta-string,
+.hljs-doctag {
+  color: #4a6b3f;          /* olive — strings */
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #15110e;          /* ink — function / tag names */
+  font-weight: 600;
+}
+
+.hljs-attribute,
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-class .hljs-title,
+.hljs-type {
+  color: #8c0d16;          /* deep crimson — attributes */
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-subst,
+.hljs-meta,
+.hljs-meta .hljs-keyword,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-link {
+  color: #9a6a18;          /* amber — meta / pseudo */
+}
+
+.hljs-built_in,
+.hljs-deletion {
+  color: #50606b;
+}
+
+.hljs-emphasis { font-style: italic; }
+.hljs-strong   { font-weight: bold; }
+
+/* line highlighting for auto-animate / data-line-numbers */
+.reveal .hljs.highlight-line { background: rgba(193, 18, 31, 0.08); }

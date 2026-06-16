@@ -1,0 +1,75 @@
+{
+    "id": "boardroom",
+    "description": "Boardroom template for corporate strategy decks — refined annual-report elegance, light",
+    "properties": {
+        "footer": {
+            "description": "Footer text (deck title, company, or fiscal period)",
+            "default": ""
+        }
+    },
+    "slideClasses": [ "normal", "title", "section", "quote" ],
+    "defaultClass": "normal",
+    "slideModifiers": [ "centered", "fullspace" ],
+    "contentClasses": [ "col", "img-right", "box", "note", "large", "small", "muted", "grey", "accent", "blue", "amber", "gold", "plus", "positive", "minus", "negative", "neutral", "callout", "warning", "success", "danger", "cite", "shadow", "metric", "metric-label", "lede", "eyebrow", "kicker", "rule" ],
+    "baseTheme": "white",
+    "styles": [ "boardroom.css", "boardroom-code.css" ],
+    "usePlugins": [ "mathjax2", "rewrite", "layout" ],
+    "reveal": {
+        "width": 1920,
+        "height": 1080,
+        "margin": 0,
+        "hash": true,
+        "center": false,
+        "transition": "fade",
+        "transitionSpeed": "slow",
+        "autoAnimateDuration": 0.9,
+        "autoAnimateEasing": "cubic-bezier(0.25, 0.1, 0.25, 1)",
+        "pdfMaxPagesPerSlide": 1,
+        "pdfSeparateFragments": false,
+        "layout": {
+            "footer": {
+                "numbering": true,
+                "label": "${footer}"
+            }
+        },
+        "rewrite": {
+            "rules": [
+                {
+                    "pattern": " -- ",
+                    "result": " &ndash; ",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "\\.\\.\\.",
+                    "result": "&hellip;",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "``",
+                    "result": "&bdquo;",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "''",
+                    "result": "&ldquo;",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "@@([^@]+)@@",
+                    "result": "<$1>",
+                    "flags": "g"
+                },
+                {
+                    "pattern": ">\\?\\?",
+                    "result": " class=\"fragment\">",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "\\|\\|([^\\|]+)\\|\\|",
+                    "result": "<span class=\"fragment\">$1</span>",
+                    "flags": "g"
+                }
+            ]
+        }
+    }
+}

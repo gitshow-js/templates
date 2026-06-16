@@ -12,6 +12,46 @@
         {
             "id": "hightech",
             "description": "High-tech light template for technical and engineering talks"
+        },
+        {
+            "id": "boardroom",
+            "description": "Refined light template for corporate strategy, board meetings, and investor reviews"
+        },
+        {
+            "id": "pitch",
+            "description": "Bold dark template for startup pitch decks and product launches"
+        },
+        {
+            "id": "academic",
+            "description": "Scholarly light template for scientific and research talks, with MathJax and citations"
+        },
+        {
+            "id": "lecture",
+            "description": "Warm, friendly light template for teaching and online courses"
+        },
+        {
+            "id": "editorial",
+            "description": "Print-magazine light template for storytelling keynotes and brand talks"
+        },
+        {
+            "id": "minimal",
+            "description": "Brutally minimal light template for high-impact, one-idea-per-slide keynotes"
+        },
+        {
+            "id": "data",
+            "description": "Dark instrument-panel template for analytics dashboards and metrics reviews"
+        },
+        {
+            "id": "studio",
+            "description": "Dark gallery template for creative portfolios and design case studies"
+        },
+        {
+            "id": "workshop",
+            "description": "Code-forward light template for hands-on workshops and tutorials"
+        },
+        {
+            "id": "retro",
+            "description": "Synthwave dark template for playful tech meetups, hackathons, and demos"
         }
     ]
 }

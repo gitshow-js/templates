@@ -1,0 +1,789 @@
+/*
+ * academic.css — Scholarly template for research talks & lectures
+ *
+ * Aesthetic: "Quiet manuscript" — a warm paper canvas with a hairline rule
+ *            running under every running head, like the top rule of a journal
+ *            page. Serif Spectral headings sit over an IBM Plex Sans body;
+ *            decoration is restrained so figures, equations and references
+ *            carry the slide. Section dividers go to a deep slate so the talk
+ *            breathes between parts.
+ * Fonts:     Spectral (serif headings & display) · IBM Plex Sans (body)
+ *            · IBM Plex Mono (labels, counters, code).
+ * Palette:   #fcfcfa paper · #1c1c1a ink · #0f6e6e teal · #8c2f2f oxblood.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  --ac-bg:          #fcfcfa;   /* paper canvas */
+  --ac-bg-alt:      #f3f2ec;   /* zebra / quiet surface */
+  --ac-surface:     #ffffff;
+  --ac-viewport:    #e8e6dd;   /* desk around slides */
+
+  --ac-ink:         #1c1c1a;   /* ink text */
+  --ac-ink-2:       #2f2f2b;
+  --ac-text:        #2a2a26;
+  --ac-muted:       #6a675e;
+  --ac-faint:       #98948a;
+
+  --ac-teal:        #0f6e6e;   /* primary accent */
+  --ac-teal-deep:   #0a5454;
+  --ac-teal-soft:   #e2efee;
+  --ac-steel:       #356a8c;   /* a calmer "blue" companion */
+  --ac-ox:          #8c2f2f;   /* oxblood secondary */
+  --ac-ox-soft:     #f3e4e2;
+
+  --ac-border:      #ddd9cd;
+  --ac-border-2:    #c9c4b5;
+  --ac-rule:        #1c1c1a;   /* the masthead hairline */
+
+  --ac-positive:    #2f7d5b;   /* teal-green */
+  --ac-negative:    #8c2f2f;   /* oxblood */
+  --ac-warning:     #a9760f;
+  --ac-neutral:     #8c887e;
+
+  --ac-display: 'Spectral', Georgia, 'Times New Roman', serif;
+  --ac-body:    'IBM Plex Sans', system-ui, sans-serif;
+  --ac-mono:    'IBM Plex Mono', ui-monospace, monospace;
+
+  --ac-font-base:        0.95em;
+  --ac-font-h1:          1.42em;
+  --ac-font-h2:          0.9em;
+  --ac-font-h3:          0.8em;
+  --ac-font-title-h1:    2.45em;
+  --ac-font-section-h1:  2.5em;
+  --ac-font-footer:      52%;
+  --ac-font-code:        0.6em;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+.reveal-viewport {
+  background:
+    radial-gradient(circle at 50% -10%, #f0eee5 0%, var(--ac-viewport) 75%);
+}
+
+html.print-pdf .reveal .slides section .fragment {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reveal {
+  font-family: var(--ac-body);
+  color: var(--ac-text);
+  font-weight: 400;
+}
+
+.reveal .slides section {
+  height: 100%;
+  text-align: left;
+  border: none;
+  padding: 0;
+  background: var(--ac-bg);
+  /* faint laid-paper warmth + a hairline left margin like a ruled page */
+  background-image:
+    linear-gradient(90deg, transparent 0, transparent calc(2.7em - 1px),
+                    rgba(140, 47, 47, 0.10) calc(2.7em - 1px),
+                    rgba(140, 47, 47, 0.10) 2.7em, transparent 2.7em);
+}
+
+.reveal .progress {
+  height: 2px;
+  color: var(--ac-teal);
+}
+
+.reveal .controls {
+  color: var(--ac-muted);
+}
+
+.reveal ::selection { background: var(--ac-teal-soft); }
+
+/* ============================================================
+   SLIDE HEADER  (journal masthead: serif title over a hairline rule)
+   ============================================================ */
+
+.reveal .slides section header {
+  background: var(--ac-bg);
+  padding: 0.62em 2.2em 0.5em 2.7em;
+  position: relative;
+  border-bottom: 2px solid var(--ac-rule);
+}
+
+/* a teal under-rule that runs the title width, sitting on the masthead line */
+.reveal .slides section header::after {
+  content: '';
+  position: absolute;
+  left: 2.7em;
+  bottom: -2px;
+  width: 3.2em;
+  height: 2px;
+  background: var(--ac-teal);
+}
+
+.reveal .slides section h1 {
+  font-family: var(--ac-display);
+  font-weight: 600;
+  font-size: var(--ac-font-h1);
+  text-transform: none;
+  color: var(--ac-ink);
+  margin: 0;
+  line-height: 1.16;
+  letter-spacing: -0.012em;
+}
+
+/* small-caps section marker before each running head */
+.reveal .slides section header h1::before {
+  content: '§';
+  font-family: var(--ac-display);
+  font-weight: 500;
+  color: var(--ac-ox);
+  margin-right: 0.42em;
+  font-size: 0.86em;
+}
+
+/* ============================================================
+   CONTENT AREA
+   ============================================================ */
+
+.reveal .slides section .content {
+  padding: 1.25em 2.7em 3.1em 2.7em;
+  line-height: 1.5;
+  font-size: var(--ac-font-base);
+  overflow-wrap: break-word;
+}
+
+/* ============================================================
+   FOOTER  (running foot: thin rule, mono folio)
+   ============================================================ */
+
+.reveal .slides section footer {
+  background: transparent;
+  color: var(--ac-muted);
+  border-top: 1px solid var(--ac-border);
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0 2.7em;
+  height: 36px;
+  line-height: 36px;
+  font-family: var(--ac-mono);
+  font-size: var(--ac-font-footer);
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+}
+
+.reveal .slides section footer .label {
+  text-transform: uppercase;
+}
+
+.reveal .slides section footer .label:empty {
+  display: none;
+}
+
+.reveal .slides section footer .notes {
+  display: none;
+}
+
+.reveal .slides section footer .slideno {
+  margin-left: auto;
+  color: var(--ac-ox);
+  font-weight: 500;
+}
+.reveal .slides section footer .slideno::before {
+  content: '— ';
+  color: var(--ac-faint);
+}
+.reveal .slides section footer .slideno::after {
+  content: ' —';
+  color: var(--ac-faint);
+}
+
+.reveal .slides section > header:empty {
+  display: none;
+}
+
+/* ============================================================
+   HEADINGS INSIDE CONTENT
+   ============================================================ */
+
+.reveal h2 {
+  font-family: var(--ac-mono);
+  font-weight: 600;
+  font-size: var(--ac-font-h2);
+  color: var(--ac-teal);
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  margin: 0.7em 0 0.32em 0;
+}
+
+.reveal h3 {
+  font-family: var(--ac-display);
+  font-weight: 600;
+  font-size: var(--ac-font-h3);
+  color: var(--ac-ink-2);
+  margin: 0.6em 0 0.2em 0;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   TEXT, EMPHASIS, LINKS
+   ============================================================ */
+
+.reveal strong { font-weight: 600; color: var(--ac-ink); }
+
+.reveal em {
+  color: var(--ac-ink-2);
+  font-style: italic;
+}
+
+.reveal i { font-style: italic; }
+
+.reveal .slides a {
+  color: var(--ac-teal);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ac-teal-soft);
+  transition: border-color 0.2s ease;
+}
+.reveal .slides a:hover { border-bottom-color: var(--ac-teal); }
+
+.reveal blockquote {
+  box-shadow: none;
+  border-left: 3px solid var(--ac-border-2);
+  background: transparent;
+  font-style: italic;
+  color: var(--ac-ink-2);
+  padding: 0.2em 1em;
+  font-family: var(--ac-display);
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+.reveal ol, .reveal dl, .reveal ul {
+  display: block;
+  margin-left: 1.2em;
+}
+
+.reveal ul li, .reveal ol li { margin-bottom: 0.26em; }
+
+.reveal ul { list-style: none; margin-left: 1.4em; }
+
+.reveal ul li::before {
+  content: '—';
+  color: var(--ac-teal);
+  display: inline-block;
+  width: 1.1em;
+  margin-left: -1.2em;
+}
+
+.reveal ul ul { margin-left: 1.5em; }
+.reveal ul ul li::before { content: '·'; color: var(--ac-faint); font-weight: 700; }
+
+.reveal ol li::marker {
+  color: var(--ac-ox);
+  font-family: var(--ac-mono);
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+
+.reveal table {
+  font-family: var(--ac-body);
+  font-size: 0.86em;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.6em 0;
+}
+
+.reveal table caption {
+  caption-side: top;
+  font-family: var(--ac-mono);
+  font-size: 0.66em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ac-muted);
+  text-align: left;
+  padding-bottom: 0.4em;
+}
+
+.reveal table th {
+  background: transparent;
+  color: var(--ac-ink);
+  font-family: var(--ac-mono);
+  font-weight: 600;
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.45em 0.9em;
+  text-align: left;
+  border: none;
+  border-bottom: 2px solid var(--ac-rule);
+}
+
+.reveal table td {
+  padding: 0.4em 0.9em;
+  border-bottom: 1px solid var(--ac-border);
+  color: var(--ac-text);
+  vertical-align: top;
+}
+
+.reveal table tr:last-child td { border-bottom: 2px solid var(--ac-border-2); }
+.reveal table tbody tr:hover td { background: var(--ac-bg-alt); }
+
+/* ============================================================
+   MATHJAX — make equations prominent and crisp
+   ============================================================ */
+
+.reveal .MathJax { color: var(--ac-ink); }
+.reveal mjx-container[display="true"] {
+  margin: 0.7em 0 !important;
+  padding: 0.55em 0.9em;
+  background: var(--ac-surface);
+  border: 1px solid var(--ac-border);
+  border-left: 3px solid var(--ac-teal);
+  border-radius: 0 4px 4px 0;
+  font-size: 1.18em;
+  box-shadow: 0 2px 10px rgba(28, 28, 26, 0.04);
+}
+
+/* ============================================================
+   CODE
+   ============================================================ */
+
+.reveal code {
+  font-family: var(--ac-mono);
+  color: var(--ac-ox);
+  font-size: 0.82em;
+  background: var(--ac-bg-alt);
+  border-radius: 3px;
+  padding: 0.05em 0.3em;
+}
+
+.reveal pre {
+  box-shadow: 0 3px 16px rgba(28, 28, 26, 0.08);
+  border: 1px solid var(--ac-border);
+  border-radius: 5px;
+  background: var(--ac-surface);
+  margin: 0.7em 0;
+  position: relative;
+}
+
+.reveal pre code {
+  font-family: var(--ac-mono);
+  font-size: var(--ac-font-code);
+  max-height: 620px;
+  line-height: 1.5;
+  background: transparent;
+  color: var(--ac-text);
+  padding: 1.1em 1.2em;
+  border-radius: 0;
+}
+
+/* ============================================================
+   UTILITY COLOUR / TYPE CLASSES
+   ============================================================ */
+
+.reveal .accent   { color: var(--ac-teal); }
+.reveal .blue     { color: var(--ac-steel); }
+.reveal .amber,
+.reveal .gold     { color: var(--ac-warning); }
+.reveal .muted,
+.reveal .grey     { color: var(--ac-muted); }
+.reveal .small    { font-size: 82%; }
+.reveal .large    { font-size: 230%; line-height: 1.1; font-family: var(--ac-display); }
+.reveal .plus,
+.reveal .positive { color: var(--ac-positive); font-weight: 600; }
+.reveal .minus,
+.reveal .negative { color: var(--ac-negative); font-weight: 600; }
+.reveal .neutral  { color: var(--ac-neutral); }
+
+.reveal .note {
+  font-size: 72%;
+  color: var(--ac-faint);
+  font-family: var(--ac-mono);
+}
+
+/* Big metric number — kept understated for a scholarly tone */
+.reveal .metric {
+  font-family: var(--ac-display);
+  font-size: 3.1em;
+  font-weight: 700;
+  color: var(--ac-ink);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  display: block;
+}
+.reveal .metric .unit { font-size: 0.4em; color: var(--ac-muted); font-weight: 600; }
+
+.reveal .metric-label {
+  font-family: var(--ac-mono);
+  font-size: 0.6em;
+  color: var(--ac-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  display: block;
+  margin-top: 0.3em;
+}
+
+/* ============================================================
+   SCHOLARLY EXTRAS — result box, references, inline refs
+   ============================================================ */
+
+/* result: teal-tinted box highlighting a key finding or theorem */
+.reveal .result {
+  background: var(--ac-teal-soft);
+  border: 1px solid #bcdbd8;
+  border-left: 4px solid var(--ac-teal);
+  border-radius: 0 5px 5px 0;
+  padding: 0.7em 1.1em;
+  margin: 0.7em 0;
+  color: var(--ac-ink-2);
+}
+.reveal .result::before {
+  content: 'Result';
+  display: block;
+  font-family: var(--ac-mono);
+  font-size: 0.62em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ac-teal-deep);
+  margin-bottom: 0.3em;
+}
+
+/* r-ref: inline superscript-style citation marker, e.g. <span class="r-ref">3</span> */
+.reveal .r-ref {
+  font-family: var(--ac-mono);
+  font-size: 0.62em;
+  font-weight: 600;
+  color: var(--ac-ox);
+  vertical-align: super;
+  line-height: 0;
+  padding: 0 0.05em;
+}
+.reveal .r-ref::before { content: '['; color: var(--ac-faint); }
+.reveal .r-ref::after  { content: ']'; color: var(--ac-faint); }
+
+/* r-refs: small reference-list container, pinned low on the slide */
+.reveal .r-refs {
+  font-family: var(--ac-body);
+  font-size: 0.62em;
+  line-height: 1.45;
+  color: var(--ac-muted);
+  border-top: 1px solid var(--ac-border);
+  padding-top: 0.6em;
+  margin-top: 0.8em;
+}
+.reveal .r-refs ol { margin-left: 1.4em; }
+.reveal .r-refs li { margin-bottom: 0.18em; }
+.reveal .r-refs li::marker { color: var(--ac-ox); font-family: var(--ac-mono); }
+.reveal .r-refs .authors { color: var(--ac-ink-2); }
+.reveal .r-refs em { font-style: italic; color: var(--ac-muted); }
+
+/* ============================================================
+   CALLOUT BOXES
+   ============================================================ */
+
+.reveal .callout,
+.reveal .warning,
+.reveal .success,
+.reveal .danger {
+  padding: 0.6em 1em;
+  margin: 0.6em 0;
+  border-radius: 0 5px 5px 0;
+  border-left: 4px solid var(--ac-steel);
+  background: rgba(53, 106, 140, 0.06);
+}
+.reveal .warning { border-left-color: var(--ac-warning); background: rgba(169, 118, 15, 0.08); }
+.reveal .success { border-left-color: var(--ac-positive); background: rgba(47, 125, 91, 0.08); }
+.reveal .danger  { border-left-color: var(--ac-ox); background: var(--ac-ox-soft); }
+
+.reveal .cite {
+  border: 1px solid var(--ac-border);
+  border-radius: 4px;
+  background: var(--ac-bg-alt);
+  padding: 0.4em 0.9em;
+  margin: 0.6em 0;
+  font-size: 72%;
+  color: var(--ac-muted);
+  font-family: var(--ac-mono);
+}
+
+.reveal .box {
+  background: var(--ac-surface);
+  border: 1px solid var(--ac-border);
+  border-radius: 5px;
+  padding: 0.8em 1em;
+}
+
+.reveal .shadow {
+  border: 1px solid var(--ac-border);
+  border-radius: 5px;
+  box-shadow: 0 4px 18px rgba(28, 28, 26, 0.12);
+}
+
+/* ============================================================
+   COLUMNS & FLOATS
+   ============================================================ */
+
+.reveal .col {
+  width: 46%;
+  float: left;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.reveal .img-right {
+  float: right;
+  margin: 0.4em 0 1em 1.4em;
+  max-width: 42%;
+}
+
+/* ============================================================
+   TITLE SLIDE
+   (layout plugin splits the slide into <header> + .content;
+    header holds the topbar + title block, content holds authors)
+   ============================================================ */
+
+.reveal .slides section.title {
+  background: var(--ac-bg);
+  background-image: none;
+  display: flex !important;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.reveal .slides section.title > header {
+  background: transparent;
+  border: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2.4em 3em 0 3em;
+}
+.reveal .slides section.title > header::after { display: none; }
+
+/* top utility bar with logo + mono coordinates, divided by a hairline rule */
+.reveal .slides section.title .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.9em;
+  border-bottom: 2px solid var(--ac-rule);
+}
+
+.reveal .slides section.title .logo {
+  display: inline-block;
+  background: url('logo.svg') no-repeat left center;
+  background-size: contain;
+  height: 1.7em;
+  width: 11em;
+}
+
+.reveal .slides section.title .coords {
+  font-family: var(--ac-mono);
+  font-size: 0.55em;
+  color: var(--ac-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.reveal .slides section.title .eyebrow {
+  font-family: var(--ac-mono);
+  font-size: 0.6em;
+  font-weight: 500;
+  color: var(--ac-ox);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin: auto 0 0.8em 0;
+}
+
+.reveal .slides section.title h1 {
+  font-family: var(--ac-display);
+  font-weight: 700;
+  font-size: var(--ac-font-title-h1);
+  color: var(--ac-ink);
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  margin: 0;
+}
+.reveal .slides section.title h1::before { content: none; }
+
+.reveal .slides section.title .subtitle {
+  font-family: var(--ac-display);
+  font-style: italic;
+  font-size: 1.05em;
+  color: var(--ac-muted);
+  margin-top: 0.55em;
+  font-weight: 400;
+}
+
+/* authors live in the content area below the header */
+.reveal .slides section.title .content {
+  flex: none;
+  padding: 1.1em 3em 2.6em 3em;
+}
+
+.reveal .slides section.title .authors {
+  font-size: 0.8em;
+  border-top: 1px solid var(--ac-border);
+  padding-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.4em;
+}
+.reveal .slides section.title .authors .who { font-weight: 600; color: var(--ac-ink); }
+.reveal .slides section.title .authors .role {
+  font-family: var(--ac-mono);
+  font-size: 0.66em;
+  color: var(--ac-muted);
+  letter-spacing: 0.02em;
+  display: block;
+  margin-top: 0.18em;
+}
+
+.reveal .slides section.title footer { display: none; }
+
+/* ============================================================
+   SECTION SLIDE  (muted slate divider — used sparingly)
+   ============================================================ */
+
+.reveal .slides section.section {
+  background: #20302f;
+  background-image:
+    radial-gradient(circle at 82% 18%, rgba(15, 110, 110, 0.30), transparent 60%);
+  background-color: #20302f;
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reveal .slides section.section header {
+  background: transparent;
+  border: none;
+  padding: 0 3em;
+  position: relative;
+  z-index: 1;
+}
+.reveal .slides section.section header::after {
+  content: '';
+  position: absolute;
+  left: 3em; bottom: -0.6em;
+  width: 3.5em; height: 2px;
+  background: var(--ac-teal);
+}
+
+.reveal .slides section.section .eyebrow {
+  font-family: var(--ac-mono);
+  font-size: 0.58em;
+  color: #6fd0c8;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 0.7em;
+}
+
+.reveal .slides section.section header h1 {
+  font-family: var(--ac-display);
+  font-weight: 700;
+  font-size: var(--ac-font-section-h1);
+  color: #f4f3ec;
+  letter-spacing: -0.022em;
+  line-height: 1.06;
+}
+.reveal .slides section.section header h1::before { content: none; }
+
+.reveal .slides section.section header p {
+  font-family: var(--ac-display);
+  font-style: italic;
+  color: #b6b2a6;
+  margin: 1em 0 0 0;
+  font-size: 0.8em;
+}
+.reveal .slides section.section header p a { color: #6fd0c8; border-bottom-color: rgba(111, 208, 200, 0.3); }
+
+.reveal .slides section.section footer {
+  border-top-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+}
+.reveal .slides section.section footer .slideno { color: #6fd0c8; }
+.reveal .slides section.section footer .slideno::before,
+.reveal .slides section.section footer .slideno::after { color: rgba(255,255,255,0.3); }
+
+.reveal .slides section.section > .content { padding: 0; }
+
+/* ============================================================
+   QUOTE SLIDE
+   ============================================================ */
+
+.reveal .slides section.quote {
+  background-image: none;
+  display: flex !important;
+  flex-direction: column;
+}
+.reveal .slides section.quote > header { display: none; }
+.reveal .slides section.quote .content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.55em;
+}
+.reveal .slides section.quote blockquote {
+  border: none;
+  font-style: italic;
+  font-weight: 500;
+  font-family: var(--ac-display);
+  color: var(--ac-ink);
+  letter-spacing: -0.005em;
+  line-height: 1.32;
+  max-width: 80%;
+  margin: 0 auto;
+}
+.reveal .slides section.quote blockquote::before {
+  content: '\201C';
+  display: block;
+  font-family: var(--ac-display);
+  font-size: 2.6em;
+  color: var(--ac-ox);
+  line-height: 0.5;
+  margin-bottom: 0.15em;
+}
+.reveal .slides section.quote .attrib {
+  font-family: var(--ac-mono);
+  font-size: 0.5em;
+  color: var(--ac-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 1.4em;
+}
+.reveal .slides section.quote footer { position: relative; }
+
+/* ============================================================
+   MODIFIERS
+   ============================================================ */
+
+.reveal .slides section.centered .content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.reveal .slides section.fullspace .content { padding: 0; }
+
+.reveal .slides section.stack > section:first-of-type footer .slideno::after {
+  content: ' ▾';
+  color: var(--ac-faint);
+}

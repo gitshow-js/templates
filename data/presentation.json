@@ -1,0 +1,20 @@
+{
+    "id": "data_sample",
+    "title": "Q2 Platform Health Review",
+    "author": "Dana Whitfield <dana.whitfield@signalgrid.example>",
+    "lang": "en",
+    "template": {
+        "name": "data",
+        "properties": {
+            "footer": "SignalGrid · Q2 FY26 Platform Health Review"
+        }
+    },
+    "contents": [
+        "00title.md",
+        "10ataglance.md",
+        "20metrics.md",
+        "30reliability.md",
+        "40forecast.md",
+        "99final.md"
+    ]
+}

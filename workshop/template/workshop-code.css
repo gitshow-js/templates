@@ -1,0 +1,76 @@
+/* workshop-code.css — light syntax highlighting tuned for legibility on the
+ * #f6f8fa code surface. Indigo keywords, green strings, teal numbers, amber
+ * types — high contrast, calm, easy to follow when coding along live. */
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: transparent;
+  color: #29303d;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #8a93a3;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-addition {
+  color: #4f46e5;          /* indigo — keywords (fn, let, if, return…) */
+  font-weight: 600;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-regexp {
+  color: #0e7490;          /* teal — numbers / literals */
+}
+
+.hljs-string,
+.hljs-meta .hljs-meta-string,
+.hljs-doctag {
+  color: #15803d;          /* green — strings */
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #1d4ed8;          /* deep blue — function / tag names */
+  font-weight: 600;
+}
+
+.hljs-attribute,
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-class .hljs-title,
+.hljs-type {
+  color: #b45309;          /* amber — types / attributes */
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-subst,
+.hljs-meta,
+.hljs-meta .hljs-keyword,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-link {
+  color: #9333ea;          /* violet — meta / macros / pseudo */
+}
+
+.hljs-built_in,
+.hljs-deletion {
+  color: #0e7490;
+}
+
+.hljs-emphasis { font-style: italic; }
+.hljs-strong   { font-weight: bold; }
+
+/* line highlighting for auto-animate / data-line-numbers */
+.reveal .hljs.highlight-line { background: rgba(79, 70, 229, 0.10); }
+.reveal .hljs-ln-line.highlight-line { background: rgba(79, 70, 229, 0.10); }

@@ -1,0 +1,875 @@
+/*
+ * workshop.css — Light, code-forward template for hands-on coding workshops,
+ *                tutorials & developer-relations sessions.
+ *
+ * Aesthetic: "Lab bench" — a clean white worksheet you code along with.
+ *            Crisp indigo signposting, numbered step badges, green "your turn"
+ *            exercise callouts, dark terminal blocks, and a faint dotted-grid
+ *            canvas reminiscent of an engineer's notebook.
+ * Fonts:     Lexend (display & body — exceptionally legible) · JetBrains Mono
+ *            (code, badges, tags, footer).
+ * Palette:   #ffffff canvas · #f6f8fa code/zebra surface · #1f2937 slate text
+ *            · #4f46e5 indigo accent · #16a34a green ("your turn"/success).
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  --wk-bg:          #ffffff;   /* slide canvas */
+  --wk-bg-alt:      #f6f8fa;   /* zebra / code / panel surface */
+  --wk-bg-soft:     #f0f3f7;   /* slightly deeper panel */
+  --wk-surface:     #ffffff;
+  --wk-viewport:    #e7ebf2;   /* area around the slides */
+
+  --wk-ink:         #111827;   /* near-black slate — headings */
+  --wk-ink-2:       #1f2937;
+  --wk-text:        #29303d;   /* body text */
+  --wk-muted:       #5b6675;
+  --wk-faint:       #8b95a4;
+
+  --wk-accent:      #4f46e5;   /* indigo — the brand colour */
+  --wk-accent-2:    #6366f1;
+  --wk-accent-soft: #eceaff;
+  --wk-accent-ink:  #2e259e;
+
+  --wk-green:       #16a34a;   /* "your turn" / success / positive */
+  --wk-green-soft:  #e5f6ea;
+  --wk-amber:       #d97706;
+  --wk-amber-soft:  #fcf0db;
+  --wk-red:         #dc2626;
+  --wk-red-soft:    #fdeaea;
+
+  --wk-border:      #e3e8ef;
+  --wk-border-2:    #cfd6e0;
+
+  /* terminal palette */
+  --wk-term-bg:     #1b2230;
+  --wk-term-bg-2:   #161c28;
+  --wk-term-text:   #d7dde8;
+  --wk-term-green:  #5be3a0;
+  --wk-term-blue:   #7aa7ff;
+  --wk-term-grey:   #7c8aa0;
+
+  --wk-dot:         rgba(79, 70, 229, 0.10);
+
+  --wk-display: 'Lexend', system-ui, sans-serif;
+  --wk-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+  --wk-font-base:        0.95em;
+  --wk-font-h1:          1.45em;
+  --wk-font-h2:          0.9em;
+  --wk-font-h3:          0.8em;
+  --wk-font-title-h1:    2.25em;
+  --wk-font-section-h1:  2.4em;
+  --wk-font-footer:      52%;
+  --wk-font-code:        0.62em;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+.reveal-viewport {
+  background:
+    radial-gradient(circle at 50% -10%, #eef1f7 0%, var(--wk-viewport) 72%);
+}
+
+html.print-pdf .reveal .slides section .fragment {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reveal {
+  font-family: var(--wk-display);
+  color: var(--wk-text);
+  font-weight: 400;
+}
+
+.reveal .slides section {
+  height: 100%;
+  text-align: left;
+  border: none;
+  padding: 0;
+  background: var(--wk-bg);
+  /* faint dotted "notebook" grid */
+  background-image: radial-gradient(var(--wk-dot) 1.4px, transparent 1.5px);
+  background-size: 38px 38px;
+  background-position: -8px -8px;
+}
+
+.reveal .progress {
+  height: 4px;
+  color: var(--wk-accent);
+}
+
+.reveal .controls {
+  color: var(--wk-accent);
+}
+
+/* ============================================================
+   SLIDE HEADER  (white bar, ink title, indigo tab)
+   ============================================================ */
+
+.reveal .slides section header {
+  background: var(--wk-surface);
+  padding: 0.62em 2.6em 0.55em 2.6em;
+  position: relative;
+  border-bottom: 1px solid var(--wk-border);
+}
+
+/* indigo progress tab anchored bottom-left of the header rule */
+.reveal .slides section header::after {
+  content: '';
+  position: absolute;
+  left: 2.6em;
+  bottom: -2px;
+  width: 2.8em;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--wk-accent);
+}
+
+.reveal .slides section h1 {
+  font-family: var(--wk-display);
+  font-weight: 700;
+  font-size: var(--wk-font-h1);
+  text-transform: none;
+  color: var(--wk-ink);
+  margin: 0;
+  line-height: 1.16;
+  letter-spacing: -0.018em;
+}
+
+/* friendly mono "›_" run prompt before every slide title */
+.reveal .slides section header h1::before {
+  content: '›';
+  font-family: var(--wk-mono);
+  font-weight: 700;
+  color: var(--wk-accent);
+  margin-right: 0.45em;
+}
+
+/* ============================================================
+   CONTENT AREA
+   ============================================================ */
+
+.reveal .slides section .content {
+  padding: 1.35em 2.75em 3.3em 2.75em;
+  line-height: 1.5;
+  font-size: var(--wk-font-base);
+  overflow-wrap: break-word;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.reveal .slides section footer {
+  background: transparent;
+  color: var(--wk-muted);
+  border-top: 1px solid var(--wk-border);
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0 2.6em;
+  height: 40px;
+  line-height: 40px;
+  font-family: var(--wk-mono);
+  font-size: var(--wk-font-footer);
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+}
+
+.reveal .slides section footer .label {
+  text-transform: uppercase;
+}
+
+.reveal .slides section footer .label:empty {
+  display: none;
+}
+
+.reveal .slides section footer .notes {
+  display: none;
+}
+
+.reveal .slides section footer .slideno {
+  margin-left: auto;
+  color: var(--wk-accent);
+  font-weight: 600;
+}
+.reveal .slides section footer .slideno::before {
+  content: 'step ';
+  color: var(--wk-faint);
+  font-weight: 400;
+}
+
+/* hide stray empty header on title-less content slides */
+.reveal .slides section > header:empty {
+  display: none;
+}
+
+/* ============================================================
+   HEADINGS INSIDE CONTENT
+   ============================================================ */
+
+.reveal h2 {
+  font-family: var(--wk-mono);
+  font-weight: 600;
+  font-size: var(--wk-font-h2);
+  color: var(--wk-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  margin: 0.7em 0 0.3em 0;
+}
+
+.reveal h3 {
+  font-family: var(--wk-display);
+  font-weight: 700;
+  font-size: var(--wk-font-h3);
+  color: var(--wk-ink-2);
+  margin: 0.6em 0 0.2em 0;
+}
+
+/* ============================================================
+   TEXT, EMPHASIS, LINKS
+   ============================================================ */
+
+.reveal strong { font-weight: 700; color: var(--wk-ink); }
+
+.reveal em {
+  color: var(--wk-accent);
+  font-style: inherit;
+  font-weight: 600;
+}
+
+.reveal i { font-style: italic; }
+
+.reveal .slides a {
+  color: var(--wk-accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--wk-accent-soft);
+  transition: border-color 0.2s ease;
+}
+.reveal .slides a:hover { border-bottom-color: var(--wk-accent); }
+
+.reveal blockquote {
+  box-shadow: none;
+  border-left: 3px solid var(--wk-border-2);
+  background: transparent;
+  font-style: italic;
+  color: var(--wk-ink-2);
+  padding: 0.2em 1em;
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+.reveal ol, .reveal dl, .reveal ul {
+  display: block;
+  margin-left: 1.2em;
+}
+
+.reveal ul li, .reveal ol li { margin-bottom: 0.26em; }
+
+.reveal ul { list-style: none; margin-left: 1.4em; }
+
+.reveal ul li::before {
+  content: '▸';
+  color: var(--wk-accent);
+  font-size: 0.85em;
+  display: inline-block;
+  width: 1.1em;
+  margin-left: -1.1em;
+}
+
+.reveal ul ul { margin-left: 1.5em; }
+.reveal ul ul li::before { content: '–'; color: var(--wk-faint); }
+
+.reveal ol { counter-reset: wk-ol; list-style: none; margin-left: 1.7em; }
+.reveal ol li {
+  counter-increment: wk-ol;
+  position: relative;
+}
+.reveal ol li::before {
+  content: counter(wk-ol);
+  position: absolute;
+  left: -1.7em;
+  top: 0.05em;
+  font-family: var(--wk-mono);
+  font-weight: 700;
+  font-size: 0.7em;
+  line-height: 1.55em;
+  width: 1.55em;
+  height: 1.55em;
+  text-align: center;
+  color: #fff;
+  background: var(--wk-accent);
+  border-radius: 50%;
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+
+.reveal table {
+  font-family: var(--wk-display);
+  font-size: 0.86em;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.6em 0;
+}
+
+.reveal table th {
+  background: var(--wk-accent);
+  color: #f3f2ff;
+  font-family: var(--wk-mono);
+  font-weight: 500;
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.5em 0.9em;
+  text-align: left;
+  border: none;
+}
+
+.reveal table td {
+  padding: 0.42em 0.9em;
+  border-bottom: 1px solid var(--wk-border);
+  color: var(--wk-text);
+  vertical-align: top;
+}
+
+.reveal table tr:nth-child(even) td { background: var(--wk-bg-alt); }
+.reveal table tr:last-child td { border-bottom: 2px solid var(--wk-border-2); }
+
+/* ============================================================
+   CODE
+   ============================================================ */
+
+.reveal code {
+  font-family: var(--wk-mono);
+  color: var(--wk-accent-ink);
+  font-size: 0.82em;
+  background: var(--wk-accent-soft);
+  border-radius: 4px;
+  padding: 0.06em 0.34em;
+}
+
+.reveal pre {
+  box-shadow: 0 8px 26px rgba(17, 24, 39, 0.10);
+  border: 1px solid var(--wk-border);
+  border-radius: 9px;
+  background: var(--wk-bg-alt);
+  margin: 0.7em 0;
+  position: relative;
+}
+
+/* filename / language tab bar on the code block */
+.reveal pre::before {
+  content: '';
+  position: absolute;
+  top: 0.95em; left: 1em;
+  width: 0.62em; height: 0.62em;
+  border-radius: 50%;
+  background: var(--wk-red);
+  box-shadow: 1.15em 0 0 var(--wk-amber), 2.3em 0 0 var(--wk-green);
+  z-index: 1;
+}
+
+.reveal pre code {
+  font-family: var(--wk-mono);
+  font-size: var(--wk-font-code);
+  max-height: 640px;
+  line-height: 1.5;
+  background: transparent;
+  color: var(--wk-text);
+  padding: 2.4em 1.3em 1.2em 1.3em;
+  border-radius: 0;
+}
+.reveal pre code:not(.hljs) { color: var(--wk-text); }
+
+/* ============================================================
+   UTILITY COLOUR / TYPE CLASSES
+   ============================================================ */
+
+.reveal .accent,
+.reveal .blue     { color: var(--wk-accent); }
+.reveal .amber,
+.reveal .gold     { color: var(--wk-amber); }
+.reveal .muted,
+.reveal .grey     { color: var(--wk-muted); }
+.reveal .small    { font-size: 82%; }
+.reveal .large    { font-size: 220%; line-height: 1.1; }
+.reveal .plus,
+.reveal .positive { color: var(--wk-green); font-weight: 600; }
+.reveal .minus,
+.reveal .negative { color: var(--wk-red); font-weight: 600; }
+.reveal .neutral  { color: var(--wk-faint); }
+
+.reveal .note {
+  font-size: 70%;
+  color: var(--wk-faint);
+  font-family: var(--wk-mono);
+}
+
+/* Big metric number */
+.reveal .metric {
+  font-family: var(--wk-display);
+  font-size: 3.1em;
+  font-weight: 800;
+  color: var(--wk-ink);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  display: block;
+}
+.reveal .metric .unit { font-size: 0.4em; color: var(--wk-muted); font-weight: 600; }
+
+.reveal .metric-label {
+  font-family: var(--wk-mono);
+  font-size: 0.62em;
+  color: var(--wk-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  display: block;
+  margin-top: 0.3em;
+}
+
+/* Tool / version pill */
+.reveal .tag {
+  display: inline-block;
+  font-family: var(--wk-mono);
+  font-size: 0.66em;
+  font-weight: 500;
+  background: var(--wk-bg-soft);
+  color: var(--wk-ink-2);
+  border: 1px solid var(--wk-border-2);
+  border-radius: 999px;
+  padding: 0.2em 0.7em;
+  margin: 0.14em 0.1em;
+  letter-spacing: 0.01em;
+  vertical-align: middle;
+}
+.reveal .tag.accent,
+.reveal .tag.blue  { background: var(--wk-accent); color: #fff; border-color: transparent; }
+.reveal .tag.plus,
+.reveal .tag.positive { background: var(--wk-green); color: #fff; border-color: transparent; }
+
+/* ============================================================
+   STEP MARKER  — numbered badge for "step N" call-along layouts
+   ============================================================ */
+
+.reveal .step {
+  display: block;
+  position: relative;
+  padding: 0.1em 0 0.5em 2.9em;
+  margin: 0.55em 0;
+  min-height: 1.9em;
+}
+.reveal .step::before {
+  content: counter(wk-step);
+  counter-increment: wk-step;
+  position: absolute;
+  left: 0; top: 0.05em;
+  width: 1.9em;
+  height: 1.9em;
+  line-height: 1.9em;
+  text-align: center;
+  font-family: var(--wk-mono);
+  font-weight: 700;
+  font-size: 0.78em;
+  color: #fff;
+  background: var(--wk-accent);
+  border-radius: 11px;
+  box-shadow: 0 3px 0 var(--wk-accent-ink);
+}
+/* the step list resets the counter on the content wrapper */
+.reveal .slides section .content { counter-reset: wk-step; }
+.reveal .step strong { color: var(--wk-ink); }
+.reveal .step .step-note {
+  display: block;
+  font-size: 0.78em;
+  color: var(--wk-muted);
+  margin-top: 0.15em;
+}
+
+/* ============================================================
+   EXERCISE  — green "your turn" callout
+   ============================================================ */
+
+.reveal .exercise {
+  position: relative;
+  background: var(--wk-green-soft);
+  border: 1px solid #bfe6cb;
+  border-left: 5px solid var(--wk-green);
+  border-radius: 0 10px 10px 0;
+  padding: 1em 1.2em 0.9em 1.2em;
+  margin: 0.8em 0;
+}
+.reveal .exercise::before {
+  content: '▶ YOUR TURN';
+  display: inline-block;
+  font-family: var(--wk-mono);
+  font-weight: 700;
+  font-size: 0.6em;
+  letter-spacing: 0.13em;
+  color: #fff;
+  background: var(--wk-green);
+  border-radius: 5px;
+  padding: 0.25em 0.7em;
+  margin-bottom: 0.6em;
+}
+.reveal .exercise strong { color: #0f7a37; }
+.reveal .exercise code { background: #d6efdd; color: #0c6b30; }
+
+/* ============================================================
+   TERMINAL  — dark output block
+   ============================================================ */
+
+.reveal .terminal {
+  font-family: var(--wk-mono);
+  font-size: 0.68em;
+  line-height: 1.55;
+  background: var(--wk-term-bg);
+  background-image: linear-gradient(180deg, var(--wk-term-bg) 0%, var(--wk-term-bg-2) 100%);
+  color: var(--wk-term-text);
+  border-radius: 9px;
+  padding: 2.3em 1.3em 1.2em 1.3em;
+  margin: 0.7em 0;
+  position: relative;
+  box-shadow: 0 8px 26px rgba(17, 24, 39, 0.22);
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+.reveal .terminal::before {
+  content: '● ● ●';
+  position: absolute;
+  top: 0.55em; left: 1em;
+  font-size: 0.9em;
+  letter-spacing: 0.18em;
+  color: #3a4862;
+}
+.reveal .terminal::after {
+  content: 'bash';
+  position: absolute;
+  top: 0.5em; right: 1em;
+  font-size: 0.82em;
+  color: var(--wk-term-grey);
+  letter-spacing: 0.06em;
+}
+.reveal .terminal .pr { color: var(--wk-term-green); }   /* prompt $ */
+.reveal .terminal .cm { color: #fff; font-weight: 600; } /* the typed command */
+.reveal .terminal .ok { color: var(--wk-term-green); }
+.reveal .terminal .hl { color: var(--wk-term-blue); }
+.reveal .terminal .dim { color: var(--wk-term-grey); }
+
+/* ============================================================
+   CALLOUT BOXES
+   ============================================================ */
+
+.reveal .callout,
+.reveal .warning,
+.reveal .success,
+.reveal .danger {
+  padding: 0.6em 1.05em;
+  margin: 0.6em 0;
+  border-radius: 0 8px 8px 0;
+  border-left: 4px solid var(--wk-accent);
+  background: var(--wk-accent-soft);
+}
+.reveal .warning { border-left-color: var(--wk-amber); background: var(--wk-amber-soft); }
+.reveal .success { border-left-color: var(--wk-green); background: var(--wk-green-soft); }
+.reveal .danger  { border-left-color: var(--wk-red);   background: var(--wk-red-soft); }
+
+.reveal .cite {
+  border: 1px solid var(--wk-border);
+  border-radius: 6px;
+  background: var(--wk-bg-alt);
+  padding: 0.4em 0.9em;
+  margin: 0.6em 0;
+  font-size: 72%;
+  color: var(--wk-muted);
+}
+
+.reveal .box {
+  background: var(--wk-surface);
+  border: 1px solid var(--wk-border);
+  border-radius: 9px;
+  padding: 0.85em 1.05em;
+}
+
+.reveal .shadow {
+  border: 1px solid var(--wk-border);
+  border-radius: 9px;
+  box-shadow: 0 8px 26px rgba(17, 24, 39, 0.13);
+}
+
+/* ============================================================
+   COLUMNS & FLOATS
+   ============================================================ */
+
+.reveal .col {
+  width: 46%;
+  float: left;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.reveal .img-right {
+  float: right;
+  margin: 0.4em 0 1em 1.4em;
+  max-width: 42%;
+}
+
+/* ============================================================
+   TITLE SLIDE
+   ============================================================ */
+
+.reveal .slides section.title {
+  background: var(--wk-bg);
+  display: flex !important;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.reveal .slides section.title > header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2.4em 2.9em 0 2.9em;
+}
+.reveal .slides section.title > header::after { display: none; }
+
+.reveal .slides section.title .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reveal .slides section.title .logo {
+  display: inline-block;
+  background: url('logo.svg') no-repeat left center;
+  background-size: contain;
+  height: 1.7em;
+  width: 11em;
+}
+
+.reveal .slides section.title .coords {
+  font-family: var(--wk-mono);
+  font-size: 0.55em;
+  color: var(--wk-faint);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.reveal .slides section.title .eyebrow {
+  font-family: var(--wk-mono);
+  font-size: 0.62em;
+  font-weight: 600;
+  color: var(--wk-accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: auto 0 0.7em 0;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+.reveal .slides section.title .eyebrow::before {
+  content: '▶';
+  color: var(--wk-green);
+  font-size: 0.85em;
+}
+
+.reveal .slides section.title h1 {
+  font-family: var(--wk-display);
+  font-weight: 800;
+  font-size: var(--wk-font-title-h1);
+  color: var(--wk-ink);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+.reveal .slides section.title h1::before { content: none; }
+
+.reveal .slides section.title .subtitle {
+  font-size: 0.95em;
+  color: var(--wk-muted);
+  margin-top: 0.55em;
+  font-weight: 400;
+}
+
+.reveal .slides section.title .content {
+  flex: none;
+  padding: 1.1em 2.9em 2.6em 2.9em;
+}
+
+.reveal .slides section.title .authors {
+  font-size: 0.82em;
+  border-top: 1px solid var(--wk-border);
+  padding-top: 1em;
+  display: flex;
+  gap: 2.4em;
+}
+.reveal .slides section.title .authors .who { font-weight: 700; color: var(--wk-ink); }
+.reveal .slides section.title .authors .role {
+  font-family: var(--wk-mono);
+  font-size: 0.68em;
+  color: var(--wk-muted);
+  letter-spacing: 0.03em;
+  display: block;
+  margin-top: 0.15em;
+}
+
+.reveal .slides section.title footer { display: none; }
+
+/* ============================================================
+   SECTION SLIDE  (indigo module divider)
+   ============================================================ */
+
+.reveal .slides section.section {
+  background: var(--wk-accent);
+  background-image:
+    radial-gradient(circle at 82% 18%, var(--wk-accent-2) 0%, transparent 55%),
+    linear-gradient(135deg, #4f46e5 0%, #3b34c4 100%);
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* faint dotted overlay echoing the canvas grid */
+.reveal .slides section.section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.10) 1.4px, transparent 1.5px);
+  background-size: 38px 38px;
+  pointer-events: none;
+}
+
+.reveal .slides section.section header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0 2.8em;
+  position: relative;
+  z-index: 1;
+}
+.reveal .slides section.section header::after {
+  content: '';
+  position: absolute;
+  left: 2.8em; bottom: -0.6em;
+  width: 3.5em; height: 4px;
+  border-radius: 2px;
+  background: var(--wk-green);
+}
+
+.reveal .slides section.section .eyebrow {
+  font-family: var(--wk-mono);
+  font-size: 0.62em;
+  color: #c7f9dd;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.6em;
+}
+.reveal .slides section.section .eyebrow::before {
+  content: '▶ ';
+  color: var(--wk-green);
+}
+
+.reveal .slides section.section header h1 {
+  font-family: var(--wk-display);
+  font-weight: 800;
+  font-size: var(--wk-font-section-h1);
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+}
+.reveal .slides section.section header h1::before { content: none; }
+
+.reveal .slides section.section header p {
+  color: rgba(255, 255, 255, 0.82);
+  margin: 1em 0 0 0;
+  font-size: 0.78em;
+}
+
+.reveal .slides section.section footer {
+  border-top-color: rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.55);
+}
+.reveal .slides section.section footer .slideno { color: #c7f9dd; }
+.reveal .slides section.section footer .slideno::before { color: rgba(255,255,255,0.5); }
+
+.reveal .slides section.section > .content { padding: 0; }
+
+/* ============================================================
+   QUOTE SLIDE
+   ============================================================ */
+
+.reveal .slides section.quote {
+  display: flex !important;
+  flex-direction: column;
+}
+.reveal .slides section.quote > header { display: none; }
+.reveal .slides section.quote .content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.55em;
+}
+.reveal .slides section.quote blockquote {
+  border: none;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--wk-ink);
+  letter-spacing: -0.01em;
+  line-height: 1.28;
+  max-width: 82%;
+  margin: 0 auto;
+}
+.reveal .slides section.quote blockquote::before {
+  content: '“';
+  display: block;
+  font-family: var(--wk-display);
+  font-size: 2.4em;
+  color: var(--wk-accent);
+  line-height: 0.4;
+  margin-bottom: 0.2em;
+}
+.reveal .slides section.quote .attrib {
+  font-family: var(--wk-mono);
+  font-size: 0.5em;
+  color: var(--wk-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 1.4em;
+}
+.reveal .slides section.quote footer { position: relative; }
+
+/* ============================================================
+   MODIFIERS
+   ============================================================ */
+
+.reveal .slides section.centered .content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.reveal .slides section.fullspace .content { padding: 0; }
+
+/* vertical-stack hint in the footer */
+.reveal .slides section.stack > section:first-of-type footer .slideno::after {
+  content: ' ▾';
+  color: var(--wk-faint);
+}

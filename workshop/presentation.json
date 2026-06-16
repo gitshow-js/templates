@@ -1,0 +1,20 @@
+{
+    "id": "workshop_sample",
+    "title": "Build a CLI in Rust — Hands-On",
+    "author": "Mira Solberg <mira@codeforge.dev>",
+    "lang": "en",
+    "template": {
+        "name": "workshop",
+        "properties": {
+            "footer": "codeforge Workshop · Build a CLI in Rust"
+        }
+    },
+    "contents": [
+        "00title.md",
+        "10setup.md",
+        "20concept.md",
+        "30build.md",
+        "40exercise.md",
+        "99recap.md"
+    ]
+}

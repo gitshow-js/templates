@@ -1,0 +1,20 @@
+{
+    "id": "minimal_sample",
+    "title": "Subtract",
+    "author": "Mara Vela <mara@forma.studio>",
+    "lang": "en",
+    "template": {
+        "name": "minimal",
+        "properties": {
+            "footer": "Subtract — a talk about doing less"
+        }
+    },
+    "contents": [
+        "00title.md",
+        "10provocation.md",
+        "20metric.md",
+        "30progression.md",
+        "40quote.md",
+        "99final.md"
+    ]
+}

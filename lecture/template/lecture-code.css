@@ -1,0 +1,73 @@
+/* lecture-code.css — warm, gentle syntax highlighting on the cream canvas */
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: transparent;
+  color: #4a4038;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #b3a594;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-addition {
+  color: #c25a3c;          /* warm coral — keywords */
+  font-weight: 700;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-regexp {
+  color: #1f7a6f;          /* deep teal — numbers */
+}
+
+.hljs-string,
+.hljs-meta .hljs-meta-string,
+.hljs-doctag {
+  color: #5a9d4e;          /* leaf green — strings */
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #2a9d8f;          /* teal — function / tag names */
+  font-weight: 700;
+}
+
+.hljs-attribute,
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-class .hljs-title,
+.hljs-type {
+  color: #b5701f;          /* amber — attributes */
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-subst,
+.hljs-meta,
+.hljs-meta .hljs-keyword,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-link {
+  color: #9a6a3a;          /* warm brown — meta / pseudo */
+}
+
+.hljs-built_in,
+.hljs-deletion {
+  color: #1f7a6f;
+}
+
+.hljs-emphasis { font-style: italic; }
+.hljs-strong   { font-weight: bold; }
+
+/* line highlighting for auto-animate / data-line-numbers */
+.reveal .hljs.highlight-line { background: rgba(42, 157, 143, 0.1); }

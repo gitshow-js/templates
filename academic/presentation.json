@@ -1,0 +1,20 @@
+{
+    "id": "academic_sample",
+    "title": "Sparse Routing for Long-Context Retrieval",
+    "author": "Mirela Anand <m.anand@orrery.research>",
+    "lang": "en",
+    "template": {
+        "name": "academic",
+        "properties": {
+            "footer": "Sparse Routing · CLRW 2026"
+        }
+    },
+    "contents": [
+        "00title.md",
+        "10background.md",
+        "20method.md",
+        "30results.md",
+        "40discussion.md",
+        "99conclusion.md"
+    ]
+}

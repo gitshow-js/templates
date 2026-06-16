@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 32" fill="none">
+  <!-- mark: rounded teal tile with a friendly open-book / sprout -->
+  <rect x="0" y="2" width="28" height="28" rx="9" fill="#2a9d8f"/>
+  <path d="M14 8.5 C11 8.5 8.5 10 8.5 10 L8.5 21 C8.5 21 11 19.6 14 19.6 C17 19.6 19.5 21 19.5 21 L19.5 10 C19.5 10 17 8.5 14 8.5 Z"
+        fill="none" stroke="#fbf6ee" stroke-width="1.8" stroke-linejoin="round"/>
+  <path d="M14 8.8 L14 19.4" stroke="#fbf6ee" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="14" cy="6.5" r="1.7" fill="#e76f51"/>
+  <!-- wordmark -->
+  <text x="38" y="22" font-family="'Baloo 2','Trebuchet MS',sans-serif"
+        font-size="18" font-weight="700" letter-spacing="0.2" fill="#2c2620">Maple<tspan fill="#2a9d8f">Hall</tspan></text>
+</svg>

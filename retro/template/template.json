@@ -1,0 +1,76 @@
+{
+    "id": "retro",
+    "description": "Retro-futuristic synthwave template — neon grid-horizon, CRT scanlines, chrome/neon text for playful tech & demoscene talks",
+    "properties": {
+        "footer": {
+            "description": "Footer text (talk title, event, or handle)",
+            "default": ""
+        }
+    },
+    "slideClasses": [ "normal", "title", "section", "quote" ],
+    "defaultClass": "normal",
+    "slideModifiers": [ "centered", "fullspace" ],
+    "contentClasses": [ "col", "img-right", "box", "note", "large", "small", "muted", "grey", "accent", "blue", "amber", "gold", "orange", "plus", "positive", "minus", "negative", "neutral", "callout", "warning", "success", "danger", "cite", "shadow", "metric", "metric-label", "neon", "tag", "glow" ],
+    "baseTheme": "black",
+    "styles": [ "retro.css", "retro-code.css" ],
+    "usePlugins": [ "mathjax2", "rewrite", "layout" ],
+    "reveal": {
+        "width": 1920,
+        "height": 1080,
+        "margin": 0,
+        "hash": true,
+        "center": false,
+        "transition": "slide",
+        "transitionSpeed": "fast",
+        "backgroundTransition": "zoom",
+        "autoAnimateDuration": 0.5,
+        "autoAnimateEasing": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "pdfMaxPagesPerSlide": 1,
+        "pdfSeparateFragments": false,
+        "layout": {
+            "footer": {
+                "numbering": true,
+                "label": "${footer}"
+            }
+        },
+        "rewrite": {
+            "rules": [
+                {
+                    "pattern": " -- ",
+                    "result": " &ndash; ",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "\\.\\.\\.",
+                    "result": "&hellip;",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "``",
+                    "result": "&bdquo;",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "''",
+                    "result": "&ldquo;",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "@@([^@]+)@@",
+                    "result": "<$1>",
+                    "flags": "g"
+                },
+                {
+                    "pattern": ">\\?\\?",
+                    "result": " class=\"fragment\">",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "\\|\\|([^\\|]+)\\|\\|",
+                    "result": "<span class=\"fragment\">$1</span>",
+                    "flags": "g"
+                }
+            ]
+        }
+    }
+}

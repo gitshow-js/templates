@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 32" fill="none">
+  <!-- mark: dark tile with a cyan signal sparkline -->
+  <rect x="0" y="2" width="28" height="28" rx="6" fill="#101a28"/>
+  <rect x="0.5" y="2.5" width="27" height="27" rx="5.5" stroke="#22d3ee" stroke-opacity="0.35"/>
+  <path d="M5.5 20 L9.5 14 L13.5 17 L18 8.5 L22.5 13"
+        stroke="#22d3ee" stroke-width="2.2"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="18" cy="8.5" r="1.7" fill="#22d3ee"/>
+  <!-- wordmark -->
+  <text x="38" y="22" font-family="'IBM Plex Mono','Courier New',monospace"
+        font-size="16" font-weight="600" letter-spacing="0.5" fill="#e4ecf5">SIGNAL<tspan fill="#22d3ee">GRID</tspan></text>
+</svg>

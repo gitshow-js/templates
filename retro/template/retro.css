@@ -1,0 +1,888 @@
+/*
+ * retro.css — Retro-futuristic synthwave template
+ *
+ * Aesthetic: "80s synthwave / retro-computing" — a deep purple-black canvas
+ *            with a sunset gradient + glowing grid-horizon, dual neon accents
+ *            (magenta + cyan), hot-yellow highlight, CRT scanline texture and
+ *            chrome/neon glowing text.
+ * Fonts:     Chakra Petch (display & headlines) · Share Tech Mono (body, code,
+ *            labels, counters, tags).
+ * Palette:   #0a0118 canvas · #ff2e97 neon magenta · #00f0ff electric cyan
+ *            · #ffd166 hot yellow · #39ff14 neon green · #ff3b3b neon red
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  --rw-bg:          #0a0118;   /* deep purple-black canvas */
+  --rw-bg-2:        #150829;   /* raised surface / code */
+  --rw-bg-3:        #1d0c39;   /* zebra / panels */
+  --rw-viewport:    #04010c;   /* area around slides */
+
+  --rw-text:        #e7d9ff;   /* soft lavender white */
+  --rw-text-dim:    #b49ad6;
+  --rw-muted:       #8a73b3;
+  --rw-faint:       #5e4b86;
+
+  --rw-magenta:     #ff2e97;   /* primary accent */
+  --rw-magenta-2:   #ff6ec7;
+  --rw-cyan:        #00f0ff;   /* secondary accent */
+  --rw-cyan-2:      #7df9ff;
+  --rw-yellow:      #ffd166;   /* highlight */
+  --rw-green:       #39ff14;   /* positive */
+  --rw-red:         #ff3b3b;   /* negative */
+  --rw-purple:      #b14bff;   /* tertiary glow */
+
+  --rw-border:      rgba(255, 46, 151, 0.35);
+  --rw-border-2:    rgba(0, 240, 255, 0.30);
+  --rw-grid:        rgba(176, 75, 255, 0.16);
+
+  /* glow shadows */
+  --rw-glow-magenta: 0 0 6px rgba(255,46,151,0.9), 0 0 18px rgba(255,46,151,0.55);
+  --rw-glow-cyan:    0 0 6px rgba(0,240,255,0.9),  0 0 18px rgba(0,240,255,0.55);
+  --rw-glow-yellow:  0 0 6px rgba(255,209,102,0.9),0 0 16px rgba(255,209,102,0.5);
+  --rw-box-glow-magenta: 0 0 12px rgba(255,46,151,0.5), inset 0 0 8px rgba(255,46,151,0.12);
+  --rw-box-glow-cyan:    0 0 12px rgba(0,240,255,0.45), inset 0 0 8px rgba(0,240,255,0.12);
+
+  --rw-display: 'Chakra Petch', 'Courier New', sans-serif;
+  --rw-mono:    'Share Tech Mono', ui-monospace, monospace;
+
+  --rw-font-base:        0.95em;
+  --rw-font-h1:          1.55em;
+  --rw-font-h2:          0.92em;
+  --rw-font-h3:          0.8em;
+  --rw-font-title-h1:    2.7em;
+  --rw-font-section-h1:  3.1em;
+  --rw-font-footer:      52%;
+  --rw-font-code:        0.62em;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+.reveal-viewport {
+  background:
+    radial-gradient(circle at 50% -10%, #1a0633 0%, var(--rw-viewport) 60%);
+}
+
+html.print-pdf .reveal .slides section .fragment {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reveal {
+  font-family: var(--rw-display);
+  color: var(--rw-text);
+  font-weight: 400;
+}
+
+.reveal .slides section {
+  height: 100%;
+  text-align: left;
+  border: none;
+  padding: 0;
+  background: var(--rw-bg);
+  /* neon perspective grid fading toward a horizon, plus a sunset glow */
+  background-image:
+    radial-gradient(ellipse 120% 60% at 50% 118%, rgba(255,46,151,0.28), transparent 60%),
+    radial-gradient(ellipse 90% 50% at 50% 120%, rgba(0,240,255,0.18), transparent 55%),
+    linear-gradient(var(--rw-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rw-grid) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    60px 60px,
+    60px 60px;
+  background-position: center, center, center, center;
+}
+
+/* CRT scanline overlay across every slide */
+.reveal .slides section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.16) 3px,
+    rgba(0, 0, 0, 0.16) 4px
+  );
+  mix-blend-mode: multiply;
+}
+
+.reveal .progress {
+  height: 3px;
+  color: var(--rw-magenta);
+}
+.reveal .progress span { box-shadow: var(--rw-glow-magenta); }
+
+.reveal .controls { color: var(--rw-cyan); }
+
+/* ============================================================
+   SLIDE HEADER  (neon title bar)
+   ============================================================ */
+
+.reveal .slides section header {
+  background: linear-gradient(180deg, rgba(21,8,41,0.9), rgba(10,1,24,0));
+  padding: 0.62em 2.6em 0.55em 2.6em;
+  position: relative;
+  border-bottom: 1px solid var(--rw-border);
+  box-shadow: 0 1px 0 rgba(255, 46, 151, 0.25);
+}
+
+/* neon underline tab anchored bottom-left of the header rule */
+.reveal .slides section header::after {
+  content: '';
+  position: absolute;
+  left: 2.6em;
+  bottom: -2px;
+  width: 3em;
+  height: 3px;
+  background: var(--rw-cyan);
+  box-shadow: var(--rw-glow-cyan);
+}
+
+.reveal .slides section h1 {
+  font-family: var(--rw-display);
+  font-weight: 700;
+  font-size: var(--rw-font-h1);
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+  line-height: 1.18;
+  letter-spacing: 0.02em;
+  text-shadow: var(--rw-glow-magenta);
+}
+
+/* mono ">_" prompt prefix before every slide title */
+.reveal .slides section header h1::before {
+  content: '>_';
+  font-family: var(--rw-mono);
+  font-weight: 400;
+  color: var(--rw-cyan);
+  margin-right: 0.4em;
+  text-shadow: var(--rw-glow-cyan);
+}
+
+/* ============================================================
+   CONTENT AREA
+   ============================================================ */
+
+.reveal .slides section .content {
+  padding: 1.4em 2.75em 3.4em 2.75em;
+  line-height: 1.5;
+  font-size: var(--rw-font-base);
+  overflow-wrap: break-word;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.reveal .slides section footer {
+  background: transparent;
+  color: var(--rw-muted);
+  border-top: 1px solid var(--rw-border-2);
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0 2.6em;
+  height: 38px;
+  line-height: 38px;
+  font-family: var(--rw-mono);
+  font-size: var(--rw-font-footer);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  z-index: 5;
+}
+
+.reveal .slides section footer .label {
+  text-transform: uppercase;
+  color: var(--rw-cyan);
+}
+
+.reveal .slides section footer .label:empty { display: none; }
+
+.reveal .slides section footer .notes { display: none; }
+
+.reveal .slides section footer .slideno {
+  margin-left: auto;
+  color: var(--rw-magenta);
+  font-weight: 400;
+  text-shadow: var(--rw-glow-magenta);
+}
+
+/* hide the stray empty header the layout plugin inserts on title-less slides */
+.reveal .slides section > header:empty { display: none; }
+
+/* ============================================================
+   HEADINGS INSIDE CONTENT
+   ============================================================ */
+
+.reveal h2 {
+  font-family: var(--rw-mono);
+  font-weight: 400;
+  font-size: var(--rw-font-h2);
+  color: var(--rw-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin: 0.7em 0 0.3em 0;
+  text-shadow: 0 0 10px rgba(0,240,255,0.45);
+}
+
+.reveal h2::before {
+  content: '// ';
+  color: var(--rw-magenta);
+}
+
+.reveal h3 {
+  font-family: var(--rw-display);
+  font-weight: 600;
+  font-size: var(--rw-font-h3);
+  color: var(--rw-yellow);
+  margin: 0.6em 0 0.2em 0;
+  letter-spacing: 0.01em;
+}
+
+/* ============================================================
+   TEXT, EMPHASIS, LINKS
+   ============================================================ */
+
+.reveal strong { font-weight: 700; color: #fff; text-shadow: 0 0 8px rgba(255,46,151,0.5); }
+
+.reveal em {
+  color: var(--rw-cyan);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.reveal i { font-style: italic; }
+
+.reveal .slides a {
+  color: var(--rw-cyan);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rw-border-2);
+  transition: all 0.2s ease;
+}
+.reveal .slides a:hover {
+  border-bottom-color: var(--rw-cyan);
+  text-shadow: var(--rw-glow-cyan);
+}
+
+.reveal blockquote {
+  box-shadow: none;
+  border-left: 3px solid var(--rw-magenta);
+  background: rgba(255, 46, 151, 0.06);
+  font-style: italic;
+  color: var(--rw-text);
+  padding: 0.2em 1em;
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+.reveal ol, .reveal dl, .reveal ul {
+  display: block;
+  margin-left: 1.2em;
+}
+
+.reveal ul li, .reveal ol li { margin-bottom: 0.26em; }
+
+.reveal ul { list-style: none; margin-left: 1.4em; }
+
+.reveal ul li::before {
+  content: '▸';
+  color: var(--rw-magenta);
+  font-size: 0.85em;
+  display: inline-block;
+  width: 1.1em;
+  margin-left: -1.1em;
+  text-shadow: var(--rw-glow-magenta);
+}
+
+.reveal ul ul { margin-left: 1.5em; }
+.reveal ul ul li::before { content: '–'; color: var(--rw-faint); text-shadow: none; }
+
+.reveal ol li::marker {
+  color: var(--rw-cyan);
+  font-family: var(--rw-mono);
+  font-weight: 400;
+  font-size: 0.9em;
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+
+.reveal table {
+  font-family: var(--rw-display);
+  font-size: 0.86em;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.6em 0;
+}
+
+.reveal table th {
+  background: linear-gradient(90deg, var(--rw-magenta), var(--rw-purple));
+  color: #fff;
+  font-family: var(--rw-mono);
+  font-weight: 400;
+  font-size: 0.74em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5em 0.9em;
+  text-align: left;
+  border: none;
+}
+
+.reveal table td {
+  padding: 0.42em 0.9em;
+  border-bottom: 1px solid var(--rw-border);
+  color: var(--rw-text);
+  vertical-align: top;
+}
+
+.reveal table tr:nth-child(even) td { background: rgba(176, 75, 255, 0.08); }
+.reveal table tr:last-child td { border-bottom: 2px solid var(--rw-cyan); }
+
+/* ============================================================
+   CODE
+   ============================================================ */
+
+.reveal code {
+  font-family: var(--rw-mono);
+  color: var(--rw-cyan);
+  font-size: 0.86em;
+  background: rgba(0, 240, 255, 0.1);
+  border-radius: 3px;
+  padding: 0.05em 0.3em;
+}
+
+.reveal pre {
+  box-shadow: var(--rw-box-glow-magenta);
+  border: 1px solid var(--rw-border);
+  border-radius: 6px;
+  background: var(--rw-bg-2);
+  margin: 0.7em 0;
+  position: relative;
+}
+
+/* CRT terminal dots on the code block */
+.reveal pre::before {
+  content: '';
+  position: absolute;
+  top: 0.85em; left: 0.9em;
+  width: 0.6em; height: 0.6em;
+  border-radius: 50%;
+  background: var(--rw-magenta);
+  box-shadow:
+    0 0 6px var(--rw-magenta),
+    1.1em 0 0 var(--rw-yellow), 1.1em 0 6px var(--rw-yellow),
+    2.2em 0 0 var(--rw-green),  2.2em 0 6px var(--rw-green);
+  z-index: 1;
+}
+
+.reveal pre code {
+  font-family: var(--rw-mono);
+  font-size: var(--rw-font-code);
+  max-height: 620px;
+  line-height: 1.5;
+  background: transparent;
+  color: var(--rw-text);
+  padding: 2.2em 1.2em 1.1em 1.2em;
+  border-radius: 0;
+}
+
+/* ============================================================
+   UTILITY COLOUR / TYPE CLASSES
+   ============================================================ */
+
+.reveal .accent,
+.reveal .orange   { color: var(--rw-magenta); text-shadow: 0 0 8px rgba(255,46,151,0.5); }
+.reveal .blue     { color: var(--rw-cyan); text-shadow: 0 0 8px rgba(0,240,255,0.5); }
+.reveal .amber,
+.reveal .gold     { color: var(--rw-yellow); text-shadow: var(--rw-glow-yellow); }
+.reveal .muted,
+.reveal .grey     { color: var(--rw-muted); }
+.reveal .small    { font-size: 82%; }
+.reveal .large    { font-size: 220%; line-height: 1.1; }
+.reveal .plus,
+.reveal .positive { color: var(--rw-green); font-weight: 600; text-shadow: 0 0 8px rgba(57,255,20,0.5); }
+.reveal .minus,
+.reveal .negative { color: var(--rw-red); font-weight: 600; text-shadow: 0 0 8px rgba(255,59,59,0.5); }
+.reveal .neutral  { color: var(--rw-muted); }
+
+/* glowing neon accent text */
+.reveal .neon {
+  color: var(--rw-magenta);
+  font-weight: 600;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 10px var(--rw-magenta),
+    0 0 22px var(--rw-magenta),
+    0 0 38px var(--rw-magenta);
+}
+
+.reveal .note {
+  font-size: 70%;
+  color: var(--rw-faint);
+  font-family: var(--rw-mono);
+}
+
+/* Big metric number — chrome/neon */
+.reveal .metric {
+  font-family: var(--rw-display);
+  font-size: 3.4em;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  display: block;
+  text-shadow: var(--rw-glow-cyan);
+}
+.reveal .metric.accent { text-shadow: var(--rw-glow-magenta); }
+.reveal .metric .unit { font-size: 0.4em; color: var(--rw-muted); font-weight: 400; text-shadow: none; }
+
+.reveal .metric-label {
+  font-family: var(--rw-mono);
+  font-size: 0.62em;
+  color: var(--rw-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  display: block;
+  margin-top: 0.35em;
+}
+
+/* neon pill badge */
+.reveal .tag {
+  display: inline-block;
+  font-family: var(--rw-mono);
+  font-size: 0.7em;
+  font-weight: 400;
+  background: transparent;
+  color: var(--rw-cyan);
+  border: 1px solid var(--rw-cyan);
+  border-radius: 999px;
+  padding: 0.16em 0.7em;
+  margin: 0.16em 0.12em;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+  box-shadow: var(--rw-box-glow-cyan);
+  text-shadow: 0 0 6px rgba(0,240,255,0.5);
+}
+.reveal .tag.accent {
+  color: var(--rw-magenta);
+  border-color: var(--rw-magenta);
+  box-shadow: var(--rw-box-glow-magenta);
+  text-shadow: 0 0 6px rgba(255,46,151,0.5);
+}
+.reveal .tag.amber, .reveal .tag.gold {
+  color: var(--rw-yellow);
+  border-color: var(--rw-yellow);
+  box-shadow: 0 0 12px rgba(255,209,102,0.45), inset 0 0 8px rgba(255,209,102,0.12);
+  text-shadow: 0 0 6px rgba(255,209,102,0.5);
+}
+
+/* adds a neon box-shadow to any element */
+.reveal .glow {
+  box-shadow: var(--rw-box-glow-magenta);
+  border-radius: 6px;
+}
+
+/* ============================================================
+   CALLOUT BOXES
+   ============================================================ */
+
+.reveal .callout,
+.reveal .warning,
+.reveal .success,
+.reveal .danger {
+  padding: 0.6em 1em;
+  margin: 0.6em 0;
+  border-radius: 0 6px 6px 0;
+  border-left: 4px solid var(--rw-cyan);
+  background: rgba(0, 240, 255, 0.07);
+  box-shadow: inset 0 0 12px rgba(0, 240, 255, 0.08);
+}
+.reveal .warning { border-left-color: var(--rw-yellow); background: rgba(255, 209, 102, 0.08); box-shadow: inset 0 0 12px rgba(255,209,102,0.08); }
+.reveal .success { border-left-color: var(--rw-green); background: rgba(57, 255, 20, 0.07); box-shadow: inset 0 0 12px rgba(57,255,20,0.08); }
+.reveal .danger  { border-left-color: var(--rw-red); background: rgba(255, 59, 59, 0.08); box-shadow: inset 0 0 12px rgba(255,59,59,0.08); }
+
+.reveal .cite {
+  border: 1px solid var(--rw-border-2);
+  border-radius: 4px;
+  background: var(--rw-bg-2);
+  padding: 0.4em 0.9em;
+  margin: 0.6em 0;
+  font-size: 72%;
+  color: var(--rw-muted);
+  font-family: var(--rw-mono);
+}
+
+.reveal .box {
+  background: var(--rw-bg-2);
+  border: 1px solid var(--rw-border);
+  border-radius: 6px;
+  padding: 0.8em 1em;
+}
+
+.reveal .shadow {
+  border: 1px solid var(--rw-border);
+  border-radius: 6px;
+  box-shadow: var(--rw-box-glow-magenta);
+}
+
+/* ============================================================
+   COLUMNS & FLOATS
+   ============================================================ */
+
+.reveal .col {
+  width: 46%;
+  float: left;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.reveal .img-right {
+  float: right;
+  margin: 0.4em 0 1em 1.4em;
+  max-width: 42%;
+}
+
+/* ============================================================
+   TITLE SLIDE
+   ============================================================ */
+
+.reveal .slides section.title {
+  background: var(--rw-bg);
+  background-image:
+    radial-gradient(ellipse 130% 70% at 50% 125%, rgba(255,46,151,0.42), transparent 60%),
+    radial-gradient(ellipse 100% 55% at 50% 128%, rgba(0,240,255,0.26), transparent 55%),
+    radial-gradient(circle at 50% 30%, rgba(255,209,102,0.10), transparent 45%);
+  display: flex !important;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* perspective grid-horizon at the bottom of the title slide */
+.reveal .slides section.title::before {
+  content: '';
+  position: absolute;
+  left: -25%; right: -25%; bottom: 0;
+  height: 46%;
+  background-image:
+    linear-gradient(rgba(0,240,255,0.5) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,46,151,0.4) 2px, transparent 2px);
+  background-size: 100% 26px, 70px 100%;
+  transform: perspective(420px) rotateX(62deg);
+  transform-origin: bottom center;
+  mask-image: linear-gradient(to top, #000 25%, transparent 92%);
+  -webkit-mask-image: linear-gradient(to top, #000 25%, transparent 92%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.reveal .slides section.title > header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2.4em 2.8em 0 2.8em;
+  position: relative;
+  z-index: 2;
+}
+.reveal .slides section.title > header::after { display: none; }
+
+.reveal .slides section.title .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reveal .slides section.title .logo {
+  display: inline-block;
+  background: url('logo.svg') no-repeat left center;
+  background-size: contain;
+  height: 1.7em;
+  width: 10em;
+  filter: drop-shadow(0 0 6px rgba(255,46,151,0.6));
+}
+
+.reveal .slides section.title .coords {
+  font-family: var(--rw-mono);
+  font-size: 0.55em;
+  color: var(--rw-cyan);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(0,240,255,0.5);
+}
+
+.reveal .slides section.title .eyebrow {
+  font-family: var(--rw-mono);
+  font-size: 0.62em;
+  font-weight: 400;
+  color: var(--rw-yellow);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin: auto 0 0.7em 0;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  text-shadow: var(--rw-glow-yellow);
+}
+.reveal .slides section.title .eyebrow::before {
+  content: '';
+  width: 2.6em;
+  height: 2px;
+  background: var(--rw-yellow);
+  box-shadow: var(--rw-glow-yellow);
+}
+
+.reveal .slides section.title h1 {
+  font-family: var(--rw-display);
+  font-weight: 700;
+  font-size: var(--rw-font-title-h1);
+  color: #fff;
+  line-height: 1.0;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0;
+  /* chrome-neon double glow */
+  text-shadow:
+    0 0 4px #fff,
+    0 0 16px var(--rw-magenta),
+    0 0 40px var(--rw-magenta),
+    0 4px 0 rgba(0,240,255,0.35);
+}
+.reveal .slides section.title h1::before { content: none; }
+
+.reveal .slides section.title .subtitle {
+  font-family: var(--rw-mono);
+  font-size: 0.8em;
+  color: var(--rw-cyan-2);
+  margin-top: 0.7em;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.reveal .slides section.title .content {
+  flex: none;
+  padding: 1.1em 2.8em 2.6em 2.8em;
+  position: relative;
+  z-index: 2;
+}
+
+.reveal .slides section.title .authors {
+  font-size: 0.82em;
+  border-top: 1px solid var(--rw-border);
+  padding-top: 1em;
+  display: flex;
+  gap: 2.4em;
+}
+.reveal .slides section.title .authors .who {
+  font-weight: 700;
+  color: var(--rw-magenta-2);
+  text-shadow: 0 0 8px rgba(255,46,151,0.5);
+}
+.reveal .slides section.title .authors .role {
+  font-family: var(--rw-mono);
+  font-size: 0.68em;
+  color: var(--rw-muted);
+  letter-spacing: 0.04em;
+  display: block;
+  margin-top: 0.15em;
+}
+
+.reveal .slides section.title footer { display: none; }
+
+/* ============================================================
+   SECTION SLIDE  (full synthwave sunset + grid horizon)
+   ============================================================ */
+
+.reveal .slides section.section {
+  background: #07010f;
+  background-image:
+    radial-gradient(circle at 50% 38%, rgba(255,209,102,0.20), transparent 30%),
+    radial-gradient(circle at 50% 40%, rgba(255,46,151,0.42), transparent 48%),
+    linear-gradient(180deg, #1a0540 0%, #3a0a4d 40%, #0a0118 70%);
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* the glowing sun disc */
+.reveal .slides section.section::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: 30%;
+  width: 26em; height: 26em;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #ffd166 0%, #ff8a3d 35%, #ff2e97 70%, transparent 72%);
+  border-radius: 50%;
+  /* horizontal sun-strips */
+  -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 14px, transparent 14px 22px);
+  mask-image: repeating-linear-gradient(to bottom, #000 0 14px, transparent 14px 22px);
+  filter: blur(0.5px) drop-shadow(0 0 60px rgba(255,46,151,0.6));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* perspective grid horizon */
+.reveal .slides section.section::after {
+  content: '';
+  position: absolute;
+  left: -25%; right: -25%; bottom: 0;
+  height: 42%;
+  background-image:
+    linear-gradient(rgba(0,240,255,0.55) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,46,151,0.45) 2px, transparent 2px);
+  background-size: 100% 26px, 64px 100%;
+  transform: perspective(380px) rotateX(64deg);
+  transform-origin: bottom center;
+  -webkit-mask-image: linear-gradient(to top, #000 20%, transparent 90%);
+  mask-image: linear-gradient(to top, #000 20%, transparent 90%);
+  mix-blend-mode: normal;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.reveal .slides section.section header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0 2.6em;
+  position: relative;
+  z-index: 2;
+}
+.reveal .slides section.section header::after { display: none; }
+
+.reveal .slides section.section .eyebrow {
+  font-family: var(--rw-mono);
+  font-size: 0.62em;
+  color: var(--rw-cyan);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 0.6em;
+  text-shadow: var(--rw-glow-cyan);
+}
+
+.reveal .slides section.section header h1 {
+  font-family: var(--rw-display);
+  font-weight: 700;
+  font-size: var(--rw-font-section-h1);
+  color: #fff;
+  letter-spacing: 0.02em;
+  line-height: 1.02;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 6px #fff,
+    0 0 22px var(--rw-magenta),
+    0 0 50px var(--rw-magenta);
+}
+.reveal .slides section.section header h1::before { content: none; }
+
+.reveal .slides section.section header p {
+  color: var(--rw-cyan-2);
+  font-family: var(--rw-mono);
+  margin: 1em 0 0 0;
+  font-size: 0.7em;
+  letter-spacing: 0.03em;
+}
+
+.reveal .slides section.section header a { color: var(--rw-yellow); border-bottom-color: rgba(255,209,102,0.4); }
+
+.reveal .slides section.section footer {
+  border-top-color: rgba(0, 240, 255, 0.18);
+  color: rgba(231, 217, 255, 0.4);
+}
+
+.reveal .slides section.section > .content { padding: 0; }
+
+/* ============================================================
+   QUOTE SLIDE
+   ============================================================ */
+
+.reveal .slides section.quote {
+  display: flex !important;
+  flex-direction: column;
+  background: var(--rw-bg);
+  background-image:
+    radial-gradient(ellipse 120% 60% at 50% 120%, rgba(176,75,255,0.25), transparent 60%);
+}
+.reveal .slides section.quote > header { display: none; }
+.reveal .slides section.quote .content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.7em;
+  z-index: 2;
+}
+.reveal .slides section.quote blockquote {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  font-style: normal;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+  max-width: 82%;
+  margin: 0 auto;
+  text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(0,240,255,0.5);
+}
+.reveal .slides section.quote blockquote::before {
+  content: '“';
+  display: block;
+  font-family: var(--rw-display);
+  font-size: 2.4em;
+  color: var(--rw-magenta);
+  line-height: 0.4;
+  margin-bottom: 0.2em;
+  text-shadow: var(--rw-glow-magenta);
+}
+.reveal .slides section.quote .attrib {
+  font-family: var(--rw-mono);
+  font-size: 0.5em;
+  color: var(--rw-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-top: 1.4em;
+  text-shadow: var(--rw-glow-yellow);
+}
+.reveal .slides section.quote footer { position: relative; }
+
+/* ============================================================
+   MODIFIERS
+   ============================================================ */
+
+.reveal .slides section.centered .content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.reveal .slides section.fullspace .content { padding: 0; }
+
+/* vertical-stack hint in footer */
+.reveal .slides section.stack > section:first-of-type footer .slideno::after {
+  content: ' ▾';
+  color: var(--rw-faint);
+}

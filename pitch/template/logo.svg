@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 32" fill="none">
+  <!-- mark: coral cloud-burst tile -->
+  <rect x="0" y="2" width="28" height="28" rx="8" fill="#ff4d5e"/>
+  <path d="M8 19.5 a4.4 4.4 0 0 1 1.1 -8.5 a5.6 5.6 0 0 1 10.6 1.2 a3.6 3.6 0 0 1 0.6 7.3 Z"
+        fill="#0b0d12"/>
+  <circle cx="20.6" cy="11.4" r="1.7" fill="#0b0d12"/>
+  <!-- wordmark -->
+  <text x="38" y="23" font-family="'Archivo Black','Arial Black',sans-serif"
+        font-size="18" letter-spacing="-0.3" fill="#f4f5f7">NIMB<tspan fill="#ff4d5e">US</tspan></text>
+</svg>

@@ -1,0 +1,75 @@
+{
+    "id": "studio",
+    "description": "Dark art-directed gallery template for creative portfolios and design case-study showcases",
+    "properties": {
+        "footer": {
+            "description": "Footer text (studio name, deck title, or handle)",
+            "default": ""
+        }
+    },
+    "slideClasses": [ "normal", "title", "section", "quote" ],
+    "defaultClass": "normal",
+    "slideModifiers": [ "centered", "fullspace" ],
+    "contentClasses": [ "col", "img-right", "box", "note", "large", "small", "muted", "grey", "accent", "blue", "amber", "gold", "plus", "positive", "minus", "negative", "neutral", "callout", "warning", "success", "danger", "cite", "shadow", "metric", "metric-label", "frame", "index", "caption", "tag" ],
+    "baseTheme": "black",
+    "styles": [ "studio.css", "studio-code.css" ],
+    "usePlugins": [ "mathjax2", "rewrite", "layout" ],
+    "reveal": {
+        "width": 1920,
+        "height": 1080,
+        "margin": 0,
+        "hash": true,
+        "center": false,
+        "transition": "slide",
+        "transitionSpeed": "default",
+        "autoAnimateDuration": 0.8,
+        "autoAnimateEasing": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "pdfMaxPagesPerSlide": 1,
+        "pdfSeparateFragments": false,
+        "layout": {
+            "footer": {
+                "numbering": true,
+                "label": "${footer}"
+            }
+        },
+        "rewrite": {
+            "rules": [
+                {
+                    "pattern": " -- ",
+                    "result": " &ndash; ",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "\\.\\.\\.",
+                    "result": "&hellip;",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "``",
+                    "result": "&bdquo;",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "''",
+                    "result": "&ldquo;",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "@@([^@]+)@@",
+                    "result": "<$1>",
+                    "flags": "g"
+                },
+                {
+                    "pattern": ">\\?\\?",
+                    "result": " class=\"fragment\">",
+                    "flags": "g"
+                },
+                {
+                    "pattern": "\\|\\|([^\\|]+)\\|\\|",
+                    "result": "<span class=\"fragment\">$1</span>",
+                    "flags": "g"
+                }
+            ]
+        }
+    }
+}

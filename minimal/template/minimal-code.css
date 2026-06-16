@@ -1,0 +1,75 @@
+/* minimal-code.css — near-monochrome syntax highlighting.
+   Code is rare in this template; keep it almost colourless — ink for tokens,
+   grey for comments, the single red reserved for keywords only. */
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: transparent;
+  color: #2a2a2a;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #9a9a98;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-addition {
+  color: #ff3b30;          /* the one accent — keywords only */
+  font-weight: 600;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-regexp {
+  color: #111111;
+}
+
+.hljs-string,
+.hljs-meta .hljs-meta-string,
+.hljs-doctag {
+  color: #6b6b6b;          /* strings recede to grey */
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #111111;
+  font-weight: 600;
+}
+
+.hljs-attribute,
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-class .hljs-title,
+.hljs-type {
+  color: #2a2a2a;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-subst,
+.hljs-meta,
+.hljs-meta .hljs-keyword,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-link {
+  color: #6b6b6b;
+}
+
+.hljs-built_in,
+.hljs-deletion {
+  color: #111111;
+}
+
+.hljs-emphasis { font-style: italic; }
+.hljs-strong   { font-weight: bold; }
+
+/* line highlighting for auto-animate / data-line-numbers */
+.reveal .hljs.highlight-line { background: rgba(255, 59, 48, 0.07); }

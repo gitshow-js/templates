@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 32" fill="none">
+  <defs>
+    <linearGradient id="rw-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd166"/>
+      <stop offset="0.5" stop-color="#ff2e97"/>
+      <stop offset="1" stop-color="#00f0ff"/>
+    </linearGradient>
+  </defs>
+  <!-- mark: neon play-triangle in a glowing tile -->
+  <rect x="0" y="2" width="28" height="28" rx="6" fill="#150827" stroke="#ff2e97" stroke-width="1.4"/>
+  <path d="M10 9 L21 16 L10 23 Z" fill="url(#rw-grad)"/>
+  <!-- wordmark -->
+  <text x="38" y="22" font-family="'Chakra Petch','Courier New',monospace"
+        font-size="16" font-weight="700" letter-spacing="1" fill="#00f0ff">RETRO<tspan fill="#ff2e97">WAVE</tspan></text>
+</svg>

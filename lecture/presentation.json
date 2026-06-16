@@ -1,0 +1,20 @@
+{
+    "id": "lecture_sample",
+    "title": "How Hashing Works",
+    "author": "Dr. Mira Castellano <m.castellano@maplehall.edu.example>",
+    "lang": "en",
+    "template": {
+        "name": "lecture",
+        "properties": {
+            "footer": "CS 101 · Lecture 12"
+        }
+    },
+    "contents": [
+        "00title.md",
+        "10objectives.md",
+        "20concept.md",
+        "30example.md",
+        "40check.md",
+        "99recap.md"
+    ]
+}

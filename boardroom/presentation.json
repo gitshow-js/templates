@@ -1,0 +1,20 @@
+{
+    "id": "boardroom_sample",
+    "title": "FY26 Strategic Review",
+    "author": "Eleanor Voss <e.voss@meridiangroup.example>",
+    "lang": "en",
+    "template": {
+        "name": "boardroom",
+        "properties": {
+            "footer": "Meridian Group · FY26 Strategic Review"
+        }
+    },
+    "contents": [
+        "00title.md",
+        "10agenda.md",
+        "20market.md",
+        "30metrics.md",
+        "40priorities.md",
+        "99final.md"
+    ]
+}

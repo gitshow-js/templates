@@ -1,0 +1,74 @@
+/* academic-code.css — light, low-contrast syntax highlighting tuned to the
+ * teal + oxblood scholarly palette. Quiet enough to sit inside a manuscript. */
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: transparent;
+  color: #2a2a26;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #98948a;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-addition {
+  color: #8c2f2f;          /* oxblood — keywords */
+  font-weight: 600;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-regexp {
+  color: #a9760f;          /* amber — numbers */
+}
+
+.hljs-string,
+.hljs-meta .hljs-meta-string,
+.hljs-doctag {
+  color: #2f7d5b;          /* teal-green strings */
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #0f6e6e;          /* teal — function / tag names */
+  font-weight: 600;
+}
+
+.hljs-attribute,
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-class .hljs-title,
+.hljs-type {
+  color: #356a8c;          /* steel — attributes */
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-subst,
+.hljs-meta,
+.hljs-meta .hljs-keyword,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-link {
+  color: #0a5454;          /* deep teal — meta / pseudo */
+}
+
+.hljs-built_in,
+.hljs-deletion {
+  color: #356a8c;
+}
+
+.hljs-emphasis { font-style: italic; }
+.hljs-strong   { font-weight: bold; }
+
+/* line highlighting for auto-animate / data-line-numbers */
+.reveal .hljs.highlight-line { background: rgba(15, 110, 110, 0.09); }

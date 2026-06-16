@@ -1,0 +1,774 @@
+/*
+ * boardroom.css — Boardroom template for corporate strategy decks
+ *
+ * Aesthetic: "Annual report" — refined, conservative, trustworthy. Warm
+ *            off-white paper canvas · deep ink text · a single brass accent ·
+ *            deep forest green for positive figures. Generous whitespace,
+ *            hairline rules, restrained fades. Nothing flashy.
+ * Fonts:     Fraunces (high-contrast display serif) · Asap (body) ·
+ *            Spline Sans Mono (figures, labels, footer).
+ * Palette:   #faf8f4 paper · #1a1d21 ink · #b08d57 brass · #1f4d3a forest ·
+ *            #8a3b34 oxblood (negatives).
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Asap:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Spline+Sans+Mono:wght@400;500;600&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  --br-paper:      #faf8f4;   /* warm off-white slide canvas */
+  --br-paper-alt:  #f2eee5;   /* zebra / surface tint */
+  --br-surface:    #fffdf9;
+  --br-viewport:   #ece6da;   /* area around slides */
+
+  --br-ink:        #1a1d21;   /* deep charcoal text */
+  --br-ink-2:      #2c3036;
+  --br-text:       #34383e;
+  --br-muted:      #6f6a60;   /* warm grey */
+  --br-faint:      #a39d90;
+
+  --br-brass:      #b08d57;   /* the one accent */
+  --br-brass-deep: #946f3c;
+  --br-brass-soft: #efe6d6;
+
+  --br-forest:     #1f4d3a;   /* secondary — positives */
+  --br-forest-soft:#e2ece6;
+
+  --br-oxblood:    #8a3b34;   /* muted negatives */
+  --br-oxblood-soft:#f1e3e1;
+
+  --br-amber:      #9a7b2e;   /* caution within the brass family */
+  --br-amber-soft: #f3ecd9;
+
+  --br-border:     #ded7c8;   /* hairline rule */
+  --br-border-2:   #c9c0ac;
+
+  --br-display: 'Fraunces', 'Times New Roman', serif;
+  --br-body:    'Asap', system-ui, sans-serif;
+  --br-mono:    'Spline Sans Mono', ui-monospace, monospace;
+
+  --br-font-base:        0.95em;
+  --br-font-h1:          1.42em;
+  --br-font-h2:          0.8em;
+  --br-font-h3:          0.82em;
+  --br-font-title-h1:    2.5em;
+  --br-font-section-h1:  2.3em;
+  --br-font-footer:      52%;
+  --br-font-code:        0.6em;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+.reveal-viewport {
+  background:
+    radial-gradient(circle at 50% -10%, #f4eee2 0%, var(--br-viewport) 75%);
+}
+
+html.print-pdf .reveal .slides section .fragment {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reveal {
+  font-family: var(--br-body);
+  color: var(--br-text);
+  font-weight: 400;
+}
+
+.reveal .slides section {
+  height: 100%;
+  text-align: left;
+  border: none;
+  padding: 0;
+  background: var(--br-paper);
+  /* faint paper texture: layered hairline gradients, very low contrast */
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(176, 141, 87, 0.035), transparent 38%),
+    radial-gradient(circle at 86% 84%, rgba(31, 77, 58, 0.03), transparent 42%),
+    linear-gradient(180deg, #fbf9f5 0%, var(--br-paper) 55%, #f7f3eb 100%);
+}
+
+.reveal .progress {
+  height: 2px;
+  color: var(--br-brass);
+}
+
+.reveal .controls {
+  color: var(--br-faint);
+}
+
+/* ============================================================
+   SLIDE HEADER  (hairline rule, serif title, brass eyebrow tick)
+   ============================================================ */
+
+.reveal .slides section header {
+  background: transparent;
+  padding: 1.5em 3.2em 0.9em 3.2em;
+  position: relative;
+  border-bottom: 1px solid var(--br-border);
+}
+
+/* brass hairline overlay on the header rule, anchored left */
+.reveal .slides section header::after {
+  content: '';
+  position: absolute;
+  left: 3.2em;
+  bottom: -1px;
+  width: 3.4em;
+  height: 2px;
+  background: var(--br-brass);
+}
+
+.reveal .slides section h1 {
+  font-family: var(--br-display);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-size: var(--br-font-h1);
+  text-transform: none;
+  color: var(--br-ink);
+  margin: 0;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   CONTENT AREA
+   ============================================================ */
+
+.reveal .slides section .content {
+  padding: 1.5em 3.3em 3.4em 3.3em;
+  line-height: 1.55;
+  font-size: var(--br-font-base);
+  overflow-wrap: break-word;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.reveal .slides section footer {
+  background: transparent;
+  color: var(--br-muted);
+  border-top: 1px solid var(--br-border);
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0 3.2em;
+  height: 40px;
+  line-height: 40px;
+  font-family: var(--br-mono);
+  font-size: var(--br-font-footer);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+}
+
+.reveal .slides section footer .label {
+  text-transform: uppercase;
+}
+
+.reveal .slides section footer .label:empty {
+  display: none;
+}
+
+.reveal .slides section footer .notes {
+  display: none;
+}
+
+.reveal .slides section footer .slideno {
+  margin-left: auto;
+  color: var(--br-brass-deep);
+  font-weight: 500;
+}
+
+/* hide stray empty header bar on title-less content slides */
+.reveal .slides section > header:empty {
+  display: none;
+}
+
+/* ============================================================
+   HEADINGS INSIDE CONTENT
+   ============================================================ */
+
+.reveal h2 {
+  font-family: var(--br-mono);
+  font-weight: 500;
+  font-size: var(--br-font-h2);
+  color: var(--br-brass-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin: 0.9em 0 0.45em 0;
+}
+
+.reveal h3 {
+  font-family: var(--br-display);
+  font-weight: 600;
+  font-style: italic;
+  font-size: var(--br-font-h3);
+  color: var(--br-ink-2);
+  margin: 0.7em 0 0.25em 0;
+}
+
+/* ============================================================
+   TEXT, EMPHASIS, LINKS
+   ============================================================ */
+
+.reveal strong { font-weight: 700; color: var(--br-ink); }
+
+.reveal em {
+  color: var(--br-brass-deep);
+  font-style: italic;
+}
+
+.reveal i { font-style: italic; }
+
+.reveal .slides a {
+  color: var(--br-forest);
+  text-decoration: none;
+  border-bottom: 1px solid var(--br-forest-soft);
+  transition: border-color 0.25s ease;
+}
+.reveal .slides a:hover { border-bottom-color: var(--br-forest); }
+
+.reveal blockquote {
+  box-shadow: none;
+  border-left: 2px solid var(--br-brass);
+  background: transparent;
+  font-style: italic;
+  color: var(--br-ink-2);
+  padding: 0.2em 1.1em;
+}
+
+/* a lead-in paragraph: larger serif, set apart */
+.reveal .lede {
+  font-family: var(--br-display);
+  font-weight: 400;
+  font-size: 1.18em;
+  line-height: 1.4;
+  color: var(--br-ink-2);
+  max-width: 30em;
+  margin: 0.2em 0 0.8em 0;
+}
+
+/* an in-content eyebrow / kicker label */
+.reveal .eyebrow,
+.reveal .kicker {
+  font-family: var(--br-mono);
+  font-size: 0.62em;
+  font-weight: 500;
+  color: var(--br-brass-deep);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.4em;
+}
+
+/* a standalone hairline divider */
+.reveal .rule {
+  border: none;
+  border-top: 1px solid var(--br-border);
+  margin: 0.9em 0;
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+.reveal ol, .reveal dl, .reveal ul {
+  display: block;
+  margin-left: 1.2em;
+}
+
+.reveal ul li, .reveal ol li { margin-bottom: 0.32em; }
+
+.reveal ul { list-style: none; margin-left: 1.3em; }
+
+.reveal ul li::before {
+  content: '—';
+  color: var(--br-brass);
+  display: inline-block;
+  width: 1.3em;
+  margin-left: -1.3em;
+}
+
+.reveal ul ul { margin-left: 1.5em; }
+.reveal ul ul li::before { content: '·'; color: var(--br-faint); }
+
+.reveal ol { counter-reset: br-ol; list-style: none; margin-left: 1.6em; }
+.reveal ol li { counter-increment: br-ol; }
+.reveal ol li::before {
+  content: counter(br-ol, decimal-leading-zero);
+  font-family: var(--br-mono);
+  font-weight: 500;
+  font-size: 0.78em;
+  color: var(--br-brass-deep);
+  display: inline-block;
+  width: 1.9em;
+  margin-left: -1.9em;
+}
+
+/* ============================================================
+   TABLES  (annual-report ledger style)
+   ============================================================ */
+
+.reveal table {
+  font-family: var(--br-body);
+  font-size: 0.84em;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.7em 0;
+}
+
+.reveal table th {
+  background: transparent;
+  color: var(--br-muted);
+  font-family: var(--br-mono);
+  font-weight: 500;
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.5em 0.95em;
+  text-align: left;
+  border: none;
+  border-bottom: 2px solid var(--br-ink);
+}
+
+/* numeric columns lean tabular & right-aligned for ledger feel */
+.reveal table th:not(:first-child),
+.reveal table td:not(:first-child) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.reveal table td {
+  padding: 0.5em 0.95em;
+  border-bottom: 1px solid var(--br-border);
+  color: var(--br-text);
+  vertical-align: top;
+}
+
+.reveal table td:first-child { font-weight: 600; color: var(--br-ink-2); }
+
+.reveal table tr:last-child td {
+  border-bottom: none;
+  border-top: 1px solid var(--br-border-2);
+}
+
+/* ============================================================
+   CODE  (rarely used here, but styled for completeness)
+   ============================================================ */
+
+.reveal code {
+  font-family: var(--br-mono);
+  color: var(--br-brass-deep);
+  font-size: 0.82em;
+  background: var(--br-paper-alt);
+  border-radius: 2px;
+  padding: 0.05em 0.32em;
+}
+
+.reveal pre {
+  box-shadow: 0 8px 26px rgba(26, 29, 33, 0.08);
+  border: 1px solid var(--br-border);
+  border-radius: 4px;
+  background: var(--br-surface);
+  margin: 0.8em 0;
+}
+
+.reveal pre code {
+  font-family: var(--br-mono);
+  font-size: var(--br-font-code);
+  max-height: 620px;
+  line-height: 1.5;
+  background: transparent;
+  color: var(--br-text);
+  padding: 1.2em 1.3em;
+  border-radius: 0;
+}
+
+/* ============================================================
+   UTILITY COLOUR / TYPE CLASSES
+   ============================================================ */
+
+.reveal .accent,
+.reveal .amber,
+.reveal .gold     { color: var(--br-brass-deep); }
+.reveal .blue     { color: var(--br-forest); }   /* mapped to forest per spec */
+.reveal .muted,
+.reveal .grey     { color: var(--br-muted); }
+.reveal .small    { font-size: 82%; }
+.reveal .large    { font-size: 215%; line-height: 1.1; }
+.reveal .plus,
+.reveal .positive { color: var(--br-forest); font-weight: 600; }
+.reveal .minus,
+.reveal .negative { color: var(--br-oxblood); font-weight: 600; }
+.reveal .neutral  { color: var(--br-muted); }
+
+.reveal .note {
+  font-size: 70%;
+  color: var(--br-faint);
+  font-family: var(--br-mono);
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   METRIC TILES  (serif numerals — the signature element)
+   ============================================================ */
+
+.reveal .metric {
+  font-family: var(--br-display);
+  font-optical-sizing: auto;
+  font-size: 3.4em;
+  font-weight: 500;
+  color: var(--br-ink);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums;
+  display: block;
+}
+.reveal .metric .unit {
+  font-size: 0.34em;
+  color: var(--br-muted);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+}
+.reveal .metric .delta {
+  font-family: var(--br-mono);
+  font-size: 0.26em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+  margin-left: 0.5em;
+}
+.reveal .metric.plus,
+.reveal .metric.positive { color: var(--br-ink); }
+.reveal .metric.plus .delta,
+.reveal .metric.positive .delta { color: var(--br-forest); }
+.reveal .metric.minus .delta,
+.reveal .metric.negative .delta { color: var(--br-oxblood); }
+
+.reveal .metric-label {
+  font-family: var(--br-mono);
+  font-size: 0.6em;
+  color: var(--br-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  display: block;
+  margin-top: 0.7em;
+  padding-top: 0.7em;
+  border-top: 1px solid var(--br-border);
+}
+
+/* ============================================================
+   CALLOUT BOXES  (hairline left border, restrained tint)
+   ============================================================ */
+
+.reveal .callout,
+.reveal .warning,
+.reveal .success,
+.reveal .danger {
+  padding: 0.7em 1.1em;
+  margin: 0.7em 0;
+  border-left: 3px solid var(--br-brass);
+  background: var(--br-brass-soft);
+}
+.reveal .warning { border-left-color: var(--br-amber);   background: var(--br-amber-soft); }
+.reveal .success { border-left-color: var(--br-forest);  background: var(--br-forest-soft); }
+.reveal .danger  { border-left-color: var(--br-oxblood); background: var(--br-oxblood-soft); }
+
+.reveal .callout strong,
+.reveal .success strong { color: var(--br-ink); }
+
+.reveal .cite {
+  border: none;
+  border-top: 1px solid var(--br-border);
+  background: transparent;
+  padding: 0.5em 0 0 0;
+  margin: 0.8em 0 0 0;
+  font-size: 68%;
+  color: var(--br-muted);
+  font-family: var(--br-mono);
+  letter-spacing: 0.02em;
+}
+
+.reveal .box {
+  background: var(--br-surface);
+  border: 1px solid var(--br-border);
+  border-radius: 3px;
+  padding: 1em 1.2em;
+}
+
+.reveal .shadow {
+  border: 1px solid var(--br-border);
+  border-radius: 3px;
+  box-shadow: 0 10px 30px rgba(26, 29, 33, 0.1);
+}
+
+/* ============================================================
+   COLUMNS & FLOATS
+   ============================================================ */
+
+.reveal .col {
+  width: 46%;
+  float: left;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.reveal .img-right {
+  float: right;
+  margin: 0.4em 0 1em 1.5em;
+  max-width: 42%;
+}
+
+/* ============================================================
+   TITLE SLIDE
+   ============================================================ */
+
+.reveal .slides section.title {
+  background: var(--br-paper);
+  display: flex !important;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.reveal .slides section.title > header {
+  background: transparent;
+  border: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2.8em 3.4em 0 3.4em;
+}
+.reveal .slides section.title > header::after { display: none; }
+
+.reveal .slides section.title .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.4em;
+  border-bottom: 1px solid var(--br-border);
+}
+
+.reveal .slides section.title .logo {
+  display: inline-block;
+  background: url('logo.svg') no-repeat left center;
+  background-size: contain;
+  height: 1.7em;
+  width: 11em;
+}
+
+.reveal .slides section.title .coords {
+  font-family: var(--br-mono);
+  font-size: 0.55em;
+  color: var(--br-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* eyebrow above the title; margin-top:auto pushes the title block to bottom */
+.reveal .slides section.title .eyebrow {
+  font-family: var(--br-mono);
+  font-size: 0.62em;
+  font-weight: 500;
+  color: var(--br-brass-deep);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin: auto 0 0.9em 0;
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+.reveal .slides section.title .eyebrow::before {
+  content: '';
+  width: 2.6em;
+  height: 1px;
+  background: var(--br-brass);
+}
+
+.reveal .slides section.title h1 {
+  font-family: var(--br-display);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-size: var(--br-font-title-h1);
+  color: var(--br-ink);
+  line-height: 1.0;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.reveal .slides section.title .subtitle {
+  font-family: var(--br-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1em;
+  color: var(--br-muted);
+  margin-top: 0.6em;
+}
+
+.reveal .slides section.title .content {
+  flex: none;
+  padding: 1.2em 3.4em 2.8em 3.4em;
+}
+
+.reveal .slides section.title .authors {
+  font-size: 0.82em;
+  border-top: 1px solid var(--br-border);
+  padding-top: 1.1em;
+  display: flex;
+  gap: 3em;
+}
+.reveal .slides section.title .authors .who {
+  font-weight: 700;
+  color: var(--br-ink);
+}
+.reveal .slides section.title .authors .role {
+  font-family: var(--br-mono);
+  font-size: 0.66em;
+  color: var(--br-muted);
+  letter-spacing: 0.04em;
+  display: block;
+  margin-top: 0.2em;
+}
+
+.reveal .slides section.title footer { display: none; }
+
+/* ============================================================
+   SECTION SLIDE  (deep forest-green break with brass eyebrow)
+   ============================================================ */
+
+.reveal .slides section.section {
+  background: var(--br-forest);
+  background-image:
+    radial-gradient(circle at 78% 16%, rgba(176, 141, 87, 0.22), transparent 55%),
+    linear-gradient(160deg, #235640 0%, var(--br-forest) 60%, #163728 100%);
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reveal .slides section.section header {
+  background: transparent;
+  border: none;
+  padding: 0 3.4em;
+  position: relative;
+  z-index: 1;
+}
+.reveal .slides section.section header::after {
+  content: '';
+  position: absolute;
+  left: 3.4em; bottom: -0.7em;
+  width: 3.6em; height: 2px;
+  background: var(--br-brass);
+}
+
+.reveal .slides section.section .eyebrow {
+  font-family: var(--br-mono);
+  font-size: 0.6em;
+  color: var(--br-brass);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-bottom: 0.7em;
+}
+
+.reveal .slides section.section header h1 {
+  font-family: var(--br-display);
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-size: var(--br-font-section-h1);
+  color: #f5f1e8;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+}
+
+.reveal .slides section.section header p {
+  font-family: var(--br-display);
+  font-style: italic;
+  color: rgba(245, 241, 232, 0.7);
+  margin: 1.1em 0 0 0;
+  font-size: 0.82em;
+  max-width: 32em;
+}
+.reveal .slides section.section header p a {
+  color: var(--br-brass);
+  border-bottom-color: rgba(176, 141, 87, 0.4);
+}
+
+.reveal .slides section.section footer {
+  border-top-color: rgba(245, 241, 232, 0.14);
+  color: rgba(245, 241, 232, 0.4);
+}
+.reveal .slides section.section footer .slideno { color: var(--br-brass); }
+
+.reveal .slides section.section > .content { padding: 0; }
+
+/* ============================================================
+   QUOTE SLIDE
+   ============================================================ */
+
+.reveal .slides section.quote {
+  display: flex !important;
+  flex-direction: column;
+}
+.reveal .slides section.quote > header { display: none; }
+.reveal .slides section.quote .content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.55em;
+}
+.reveal .slides section.quote blockquote {
+  border: none;
+  font-family: var(--br-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--br-ink);
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+  max-width: 22em;
+  margin: 0 auto;
+}
+.reveal .slides section.quote blockquote::before {
+  content: '“';
+  display: block;
+  font-family: var(--br-display);
+  font-size: 2.6em;
+  color: var(--br-brass);
+  line-height: 0.5;
+  margin-bottom: 0.15em;
+}
+.reveal .slides section.quote .attrib {
+  font-family: var(--br-mono);
+  font-size: 0.46em;
+  color: var(--br-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-top: 1.6em;
+}
+.reveal .slides section.quote footer { position: relative; }
+
+/* ============================================================
+   MODIFIERS
+   ============================================================ */
+
+.reveal .slides section.centered .content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.reveal .slides section.fullspace .content { padding: 0; }
+
+/* vertical-stack hint in footer */
+.reveal .slides section.stack > section:first-of-type footer .slideno::after {
+  content: ' ▾';
+  color: var(--br-faint);
+}

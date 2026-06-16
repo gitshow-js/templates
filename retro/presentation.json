@@ -1,0 +1,20 @@
+{
+    "id": "retro_sample",
+    "title": "RETROWAVE.JS — Demos in the Browser",
+    "author": "Jules \"axiom\" Vance <axiom@neon-grid.demo>",
+    "lang": "en",
+    "template": {
+        "name": "retro",
+        "properties": {
+            "footer": "NEON GRID MEETUP // VOL.7"
+        }
+    },
+    "contents": [
+        "00title.md",
+        "10why.md",
+        "20stack.md",
+        "30code.md",
+        "40stats.md",
+        "99final.md"
+    ]
+}

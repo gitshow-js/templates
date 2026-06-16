@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 32" fill="none">
+  <!-- mark: oxblood serifed bracket framing a teal aperture -->
+  <rect x="0.6" y="2.6" width="26.8" height="26.8" rx="4" fill="none" stroke="#0f6e6e" stroke-width="1.6"/>
+  <path d="M9 9 L9 23 M9 9 L13.5 9 M9 16 L12.5 16" stroke="#1c1c1a" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="19.5" cy="16" r="4.4" fill="none" stroke="#8c2f2f" stroke-width="1.8"/>
+  <!-- wordmark: serif, scholarly -->
+  <text x="36" y="22" font-family="Spectral, Georgia, serif"
+        font-size="18" font-weight="600" letter-spacing="0.2" fill="#1c1c1a">Vellum<tspan fill="#0f6e6e">Lab</tspan></text>
+</svg>

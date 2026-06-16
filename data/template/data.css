@@ -1,0 +1,889 @@
+/*
+ * data.css — Instrument-panel template for analytics & ops/status reports
+ *
+ * Aesthetic: "instrument panel" — a dense, grid-based dark dashboard. Deep
+ *            navy/charcoal canvas with faint dashboard gridlines, light slate
+ *            text, a single cyan signal accent, and semantic green/amber/red
+ *            status colours. KPI tiles, status dots, sparkline-friendly
+ *            spacing, and crisp tabular tables. Function-first but crisp.
+ * Fonts:     IBM Plex Sans (body & headings) · IBM Plex Mono (labels, numbers,
+ *            tags, footer). Tabular figures everywhere.
+ * Palette:   #0d1420 canvas · #e4ecf5 slate text · #22d3ee signal cyan
+ *            · #34d399 green · #fbbf24 amber · #f87171 red
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  --dx-bg:          #0d1420;   /* slide canvas */
+  --dx-bg-alt:      #111c2c;   /* panels, zebra, code surface */
+  --dx-bg-deep:     #0a0f18;   /* section / deepest panel */
+  --dx-surface:     #142235;   /* tile surface */
+  --dx-viewport:    #070b12;   /* area around slides */
+
+  --dx-text:        #e4ecf5;   /* light slate body text */
+  --dx-head:        #f4f8fc;   /* headings / strong */
+  --dx-muted:       #8ea1b8;   /* secondary text */
+  --dx-faint:       #56697f;   /* labels, ticks, gridline text */
+
+  --dx-accent:      #22d3ee;   /* signal cyan — the one accent */
+  --dx-accent-dim:  rgba(34, 211, 238, 0.14);
+  --dx-accent-glow: rgba(34, 211, 238, 0.40);
+
+  --dx-positive:    #34d399;   /* green  */
+  --dx-negative:    #f87171;   /* red    */
+  --dx-warning:     #fbbf24;   /* amber  */
+  --dx-neutral:     #7b8ca0;   /* grey   */
+
+  --dx-border:      #223349;
+  --dx-border-2:    #2e425c;
+  --dx-grid:        rgba(120, 160, 200, 0.045);
+
+  --dx-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --dx-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --dx-font-base:        0.95em;
+  --dx-font-h1:          1.42em;
+  --dx-font-h2:          0.78em;
+  --dx-font-h3:          0.8em;
+  --dx-font-title-h1:    2.25em;
+  --dx-font-section-h1:  2.4em;
+  --dx-font-footer:      52%;
+  --dx-font-code:        0.62em;
+
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+.reveal-viewport {
+  background:
+    radial-gradient(circle at 50% -10%, #0f1a2a 0%, var(--dx-viewport) 72%);
+}
+
+html.print-pdf .reveal .slides section .fragment {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reveal {
+  font-family: var(--dx-sans);
+  color: var(--dx-text);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.reveal .slides section {
+  height: 100%;
+  text-align: left;
+  border: none;
+  padding: 0;
+  background: var(--dx-bg);
+  /* faint dashboard gridlines */
+  background-image:
+    linear-gradient(var(--dx-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--dx-grid) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.reveal .progress {
+  height: 3px;
+  color: var(--dx-accent);
+}
+
+.reveal .controls {
+  color: var(--dx-muted);
+}
+
+/* ============================================================
+   SLIDE HEADER  (panel bar, slate title, cyan tick)
+   ============================================================ */
+
+.reveal .slides section header {
+  background:
+    linear-gradient(180deg, var(--dx-bg-alt), rgba(17, 28, 44, 0.4));
+  padding: 0.62em 2.6em 0.55em 2.6em;
+  position: relative;
+  border-bottom: 1px solid var(--dx-border);
+}
+
+/* cyan progress tick anchored bottom-left of the header rule */
+.reveal .slides section header::after {
+  content: '';
+  position: absolute;
+  left: 2.6em;
+  bottom: -2px;
+  width: 2.6em;
+  height: 3px;
+  background: var(--dx-accent);
+  box-shadow: 0 0 10px var(--dx-accent-glow);
+}
+
+.reveal .slides section h1 {
+  font-family: var(--dx-sans);
+  font-weight: 600;
+  font-size: var(--dx-font-h1);
+  text-transform: none;
+  color: var(--dx-head);
+  margin: 0;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+}
+
+/* mono prompt marker before every slide title */
+.reveal .slides section header h1::before {
+  content: '▸';
+  font-family: var(--dx-mono);
+  font-weight: 700;
+  color: var(--dx-accent);
+  margin-right: 0.45em;
+  font-size: 0.8em;
+}
+
+/* ============================================================
+   CONTENT AREA
+   ============================================================ */
+
+.reveal .slides section .content {
+  padding: 1.3em 2.75em 3.4em 2.75em;
+  line-height: 1.5;
+  font-size: var(--dx-font-base);
+  overflow-wrap: break-word;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.reveal .slides section footer {
+  background: transparent;
+  color: var(--dx-faint);
+  border-top: 1px solid var(--dx-border);
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0 2.6em;
+  height: 38px;
+  line-height: 38px;
+  font-family: var(--dx-mono);
+  font-size: var(--dx-font-footer);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+}
+
+.reveal .slides section footer .label {
+  text-transform: uppercase;
+}
+
+.reveal .slides section footer .label:empty {
+  display: none;
+}
+
+.reveal .slides section footer .notes {
+  display: none;
+}
+
+.reveal .slides section footer .slideno {
+  margin-left: auto;
+  color: var(--dx-accent);
+  font-weight: 600;
+}
+.reveal .slides section footer .slideno::before {
+  content: '◖ ';
+  color: var(--dx-faint);
+}
+
+/* hide the empty header the layout plugin inserts on title-less slides */
+.reveal .slides section > header:empty {
+  display: none;
+}
+
+/* ============================================================
+   HEADINGS INSIDE CONTENT
+   ============================================================ */
+
+.reveal h2 {
+  font-family: var(--dx-mono);
+  font-weight: 600;
+  font-size: var(--dx-font-h2);
+  color: var(--dx-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin: 0.7em 0 0.35em 0;
+}
+
+.reveal h2::before {
+  content: '// ';
+  color: var(--dx-faint);
+}
+
+.reveal h3 {
+  font-family: var(--dx-sans);
+  font-weight: 600;
+  font-size: var(--dx-font-h3);
+  color: var(--dx-head);
+  margin: 0.6em 0 0.2em 0;
+}
+
+/* ============================================================
+   TEXT, EMPHASIS, LINKS
+   ============================================================ */
+
+.reveal strong { font-weight: 600; color: var(--dx-head); }
+
+.reveal em {
+  color: var(--dx-accent);
+  font-style: inherit;
+  font-weight: 500;
+}
+
+.reveal i { font-style: italic; }
+
+.reveal .slides a {
+  color: var(--dx-accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--dx-accent-dim);
+  transition: border-color 0.2s ease;
+}
+.reveal .slides a:hover { border-bottom-color: var(--dx-accent); }
+
+.reveal blockquote {
+  box-shadow: none;
+  border-left: 3px solid var(--dx-border-2);
+  background: transparent;
+  font-style: italic;
+  color: var(--dx-text);
+  padding: 0.2em 1em;
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+.reveal ol, .reveal dl, .reveal ul {
+  display: block;
+  margin-left: 1.2em;
+}
+
+.reveal ul li, .reveal ol li { margin-bottom: 0.26em; }
+
+.reveal ul { list-style: none; margin-left: 1.4em; }
+
+.reveal ul li::before {
+  content: '▪';
+  color: var(--dx-accent);
+  font-size: 0.9em;
+  display: inline-block;
+  width: 1.1em;
+  margin-left: -1.1em;
+}
+
+.reveal ul ul { margin-left: 1.5em; }
+.reveal ul ul li::before { content: '–'; color: var(--dx-faint); }
+
+.reveal ol li::marker {
+  color: var(--dx-accent);
+  font-family: var(--dx-mono);
+  font-weight: 700;
+  font-size: 0.85em;
+}
+
+/* ============================================================
+   TABLES  (strong metric-report styling)
+   ============================================================ */
+
+.reveal table {
+  font-family: var(--dx-sans);
+  font-size: 0.84em;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.6em 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.reveal table th {
+  background: var(--dx-bg-deep);
+  color: var(--dx-muted);
+  font-family: var(--dx-mono);
+  font-weight: 500;
+  font-size: 0.74em;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  padding: 0.55em 0.95em;
+  text-align: left;
+  border-bottom: 1px solid var(--dx-border-2);
+}
+
+.reveal table th:first-child { border-left: 3px solid var(--dx-accent); }
+
+/* numeric columns read right-aligned and mono */
+.reveal table td + td {
+  font-family: var(--dx-mono);
+  font-size: 0.92em;
+  text-align: right;
+}
+.reveal table th + th { text-align: right; }
+
+.reveal table td {
+  padding: 0.42em 0.95em;
+  border-bottom: 1px solid var(--dx-border);
+  color: var(--dx-text);
+  vertical-align: middle;
+}
+.reveal table td:first-child {
+  font-family: var(--dx-sans);
+  text-align: left;
+  color: var(--dx-head);
+}
+
+.reveal table tr:nth-child(even) td { background: rgba(255, 255, 255, 0.012); }
+.reveal table tbody tr:hover td { background: var(--dx-accent-dim); }
+.reveal table tr:last-child td { border-bottom: 2px solid var(--dx-border-2); }
+
+/* ============================================================
+   CODE
+   ============================================================ */
+
+.reveal code {
+  font-family: var(--dx-mono);
+  color: var(--dx-accent);
+  font-size: 0.85em;
+  background: var(--dx-bg-alt);
+  border-radius: 3px;
+  padding: 0.05em 0.34em;
+}
+
+.reveal pre {
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--dx-border);
+  border-radius: 6px;
+  background: var(--dx-bg-deep);
+  margin: 0.7em 0;
+  position: relative;
+}
+
+.reveal pre::before {
+  content: '';
+  position: absolute;
+  top: 0.85em; left: 0.9em;
+  width: 0.6em; height: 0.6em;
+  border-radius: 50%;
+  background: var(--dx-accent);
+  box-shadow: 1.1em 0 0 var(--dx-faint), 2.2em 0 0 var(--dx-border-2);
+  z-index: 1;
+}
+
+.reveal pre code {
+  font-family: var(--dx-mono);
+  font-size: var(--dx-font-code);
+  max-height: 620px;
+  line-height: 1.5;
+  background: transparent;
+  color: var(--dx-text);
+  padding: 2.2em 1.2em 1.1em 1.2em;
+  border-radius: 0;
+}
+
+/* ============================================================
+   UTILITY COLOUR / TYPE CLASSES
+   ============================================================ */
+
+.reveal .accent   { color: var(--dx-accent); }
+.reveal .blue     { color: var(--dx-accent); }
+.reveal .amber,
+.reveal .gold     { color: var(--dx-warning); }
+.reveal .muted,
+.reveal .grey     { color: var(--dx-muted); }
+.reveal .small    { font-size: 82%; }
+.reveal .large    { font-size: 220%; line-height: 1.1; }
+.reveal .plus,
+.reveal .positive { color: var(--dx-positive); font-weight: 600; }
+.reveal .minus,
+.reveal .negative { color: var(--dx-negative); font-weight: 600; }
+.reveal .neutral  { color: var(--dx-neutral); }
+
+.reveal .note {
+  font-size: 70%;
+  color: var(--dx-faint);
+  font-family: var(--dx-mono);
+}
+
+/* Big metric number */
+.reveal .metric {
+  font-family: var(--dx-mono);
+  font-size: 2.8em;
+  font-weight: 600;
+  color: var(--dx-head);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+.reveal .metric .unit { font-size: 0.4em; color: var(--dx-muted); font-weight: 500; }
+
+.reveal .metric-label {
+  font-family: var(--dx-mono);
+  font-size: 0.6em;
+  color: var(--dx-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  display: block;
+  margin-top: 0.35em;
+}
+
+/* delta chip — small mono trend indicator beside a metric */
+.reveal .delta {
+  font-family: var(--dx-mono);
+  font-size: 0.62em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  display: inline-block;
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--dx-muted);
+}
+.reveal .delta.plus,
+.reveal .delta.positive { color: var(--dx-positive); background: rgba(52, 211, 153, 0.12); }
+.reveal .delta.minus,
+.reveal .delta.negative { color: var(--dx-negative); background: rgba(248, 113, 113, 0.12); }
+
+/* Tag / version pill */
+.reveal .tag {
+  display: inline-block;
+  font-family: var(--dx-mono);
+  font-size: 0.68em;
+  font-weight: 500;
+  background: var(--dx-bg-alt);
+  color: var(--dx-text);
+  border: 1px solid var(--dx-border-2);
+  border-radius: 4px;
+  padding: 0.16em 0.55em;
+  margin: 0.12em 0.12em;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+}
+.reveal .tag.accent { background: var(--dx-accent-dim); color: var(--dx-accent); border-color: rgba(34, 211, 238, 0.35); }
+.reveal .tag.blue   { background: var(--dx-accent-dim); color: var(--dx-accent); border-color: rgba(34, 211, 238, 0.35); }
+
+/* Status indicators — coloured dot + label */
+.reveal .status-ok,
+.reveal .status-warn,
+.reveal .status-error {
+  font-family: var(--dx-mono);
+  font-size: 0.85em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.reveal .status-ok    { color: var(--dx-positive); }
+.reveal .status-warn  { color: var(--dx-warning); }
+.reveal .status-error { color: var(--dx-negative); }
+.reveal .status-ok::before,
+.reveal .status-warn::before,
+.reveal .status-error::before {
+  content: '●';
+  margin-right: 0.4em;
+  font-size: 0.85em;
+  vertical-align: middle;
+}
+.reveal .status-ok::before    { text-shadow: 0 0 7px var(--dx-positive); }
+.reveal .status-warn::before  { text-shadow: 0 0 7px var(--dx-warning); }
+.reveal .status-error::before { text-shadow: 0 0 7px var(--dx-negative); }
+
+/* ============================================================
+   KPI TILES  (instrument-panel metric grid)
+   ============================================================ */
+
+.reveal .tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 0.9em;
+  margin: 0.7em 0;
+  clear: both;
+}
+.reveal .tile-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.reveal .tile-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.reveal .tile-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+.reveal .tile {
+  background:
+    linear-gradient(180deg, var(--dx-surface), var(--dx-bg-alt));
+  border: 1px solid var(--dx-border);
+  border-radius: 8px;
+  padding: 0.85em 1em 0.9em 1em;
+  position: relative;
+  overflow: hidden;
+}
+/* cyan instrument rail down the left edge of every tile */
+.reveal .tile::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--dx-accent);
+  opacity: 0.7;
+}
+.reveal .tile.warn::before  { background: var(--dx-warning); }
+.reveal .tile.error::before { background: var(--dx-negative); }
+.reveal .tile.ok::before    { background: var(--dx-positive); }
+
+.reveal .tile .metric-label { margin-top: 0; margin-bottom: 0.45em; }
+.reveal .tile .metric { font-size: 2.1em; }
+.reveal .tile .delta { margin-top: 0.5em; }
+
+/* ============================================================
+   SPARKLINE / CSS BAR PRIMITIVES
+   ============================================================ */
+
+/* a horizontal track that fills to a width % — use inline width style */
+.reveal .bar {
+  display: block;
+  height: 0.85em;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--dx-accent), #5ee7f5);
+  box-shadow: 0 0 12px var(--dx-accent-glow);
+}
+.reveal .bar.warn { background: linear-gradient(90deg, var(--dx-warning), #fcd34d); box-shadow: none; }
+.reveal .bar.bad  { background: linear-gradient(90deg, var(--dx-negative), #fca5a5); box-shadow: none; }
+.reveal .bar.good { background: linear-gradient(90deg, var(--dx-positive), #6ee7b7); box-shadow: none; }
+
+/* sparkline column row — children are inline-block bars sized by inline height */
+.reveal .spark {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 3.4em;
+}
+.reveal .spark > i {
+  flex: 1;
+  background: var(--dx-accent);
+  border-radius: 2px 2px 0 0;
+  opacity: 0.78;
+}
+.reveal .spark > i:last-child { background: var(--dx-head); opacity: 1; }
+
+/* ============================================================
+   CALLOUT BOXES
+   ============================================================ */
+
+.reveal .callout,
+.reveal .warning,
+.reveal .success,
+.reveal .danger {
+  padding: 0.6em 1em;
+  margin: 0.6em 0;
+  border-radius: 0 6px 6px 0;
+  border-left: 4px solid var(--dx-accent);
+  background: rgba(34, 211, 238, 0.07);
+}
+.reveal .warning { border-left-color: var(--dx-warning); background: rgba(251, 191, 36, 0.08); }
+.reveal .success { border-left-color: var(--dx-positive); background: rgba(52, 211, 153, 0.08); }
+.reveal .danger  { border-left-color: var(--dx-negative); background: rgba(248, 113, 113, 0.08); }
+
+.reveal .cite {
+  border: 1px solid var(--dx-border);
+  border-radius: 4px;
+  background: var(--dx-bg-alt);
+  padding: 0.4em 0.9em;
+  margin: 0.6em 0;
+  font-size: 72%;
+  color: var(--dx-muted);
+}
+
+.reveal .box {
+  background: var(--dx-bg-alt);
+  border: 1px solid var(--dx-border);
+  border-radius: 6px;
+  padding: 0.8em 1em;
+}
+
+.reveal .shadow {
+  border: 1px solid var(--dx-border);
+  border-radius: 6px;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================
+   COLUMNS & FLOATS
+   ============================================================ */
+
+.reveal .col {
+  width: 46%;
+  float: left;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.reveal .img-right {
+  float: right;
+  margin: 0.4em 0 1em 1.4em;
+  max-width: 42%;
+}
+
+/* ============================================================
+   TITLE SLIDE
+   ============================================================ */
+
+.reveal .slides section.title {
+  background: var(--dx-bg);
+  display: flex !important;
+  flex-direction: column;
+  overflow: hidden;
+}
+/* faint scope grid plus a cyan glow rising from the lower-left */
+.reveal .slides section.title::before {
+  content: '';
+  position: absolute;
+  left: -10%; bottom: -25%;
+  width: 70%; height: 75%;
+  background: radial-gradient(circle, var(--dx-accent-glow), transparent 62%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.reveal .slides section.title > header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2.4em 2.8em 0 2.8em;
+  position: relative;
+  z-index: 1;
+}
+.reveal .slides section.title > header::after { display: none; }
+
+.reveal .slides section.title .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reveal .slides section.title .logo {
+  display: inline-block;
+  background: url('logo.svg') no-repeat left center;
+  background-size: contain;
+  height: 1.6em;
+  width: 10em;
+}
+
+.reveal .slides section.title .coords {
+  font-family: var(--dx-mono);
+  font-size: 0.55em;
+  color: var(--dx-faint);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.reveal .slides section.title .eyebrow {
+  font-family: var(--dx-mono);
+  font-size: 0.62em;
+  font-weight: 500;
+  color: var(--dx-accent);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin: auto 0 0.7em 0;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+.reveal .slides section.title .eyebrow::before {
+  content: '';
+  width: 2.4em;
+  height: 2px;
+  background: var(--dx-accent);
+  box-shadow: 0 0 8px var(--dx-accent-glow);
+}
+
+.reveal .slides section.title h1 {
+  font-family: var(--dx-sans);
+  font-weight: 700;
+  font-size: var(--dx-font-title-h1);
+  color: var(--dx-head);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+.reveal .slides section.title h1::before { content: none; }
+
+.reveal .slides section.title .subtitle {
+  font-size: 0.95em;
+  color: var(--dx-muted);
+  margin-top: 0.5em;
+  font-weight: 400;
+}
+
+.reveal .slides section.title .content {
+  flex: none;
+  padding: 1.1em 2.8em 2.6em 2.8em;
+  position: relative;
+  z-index: 1;
+}
+
+.reveal .slides section.title .authors {
+  font-size: 0.82em;
+  border-top: 1px solid var(--dx-border);
+  padding-top: 1em;
+  display: flex;
+  gap: 2.4em;
+}
+.reveal .slides section.title .authors .who { font-weight: 600; color: var(--dx-head); }
+.reveal .slides section.title .authors .role {
+  font-family: var(--dx-mono);
+  font-size: 0.68em;
+  color: var(--dx-muted);
+  letter-spacing: 0.03em;
+  display: block;
+  margin-top: 0.15em;
+}
+
+.reveal .slides section.title footer { display: none; }
+
+/* ============================================================
+   SECTION SLIDE  (darker panel · cyan rule + glow)
+   ============================================================ */
+
+.reveal .slides section.section {
+  background: var(--dx-bg-deep);
+  background-image:
+    linear-gradient(rgba(120, 160, 200, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 160, 200, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reveal .slides section.section::before {
+  content: '';
+  position: absolute;
+  top: -15%; right: -8%;
+  width: 60%; height: 75%;
+  background: radial-gradient(circle, var(--dx-accent-glow), transparent 64%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.reveal .slides section.section header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0 2.6em;
+  position: relative;
+  z-index: 1;
+}
+.reveal .slides section.section header::after {
+  content: '';
+  position: absolute;
+  left: 2.6em; bottom: -0.6em;
+  width: 3.5em; height: 3px;
+  background: var(--dx-accent);
+  box-shadow: 0 0 14px var(--dx-accent-glow);
+}
+
+.reveal .slides section.section .eyebrow {
+  font-family: var(--dx-mono);
+  font-size: 0.6em;
+  color: var(--dx-accent);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 0.6em;
+}
+
+.reveal .slides section.section header h1 {
+  font-family: var(--dx-sans);
+  font-weight: 700;
+  font-size: var(--dx-font-section-h1);
+  color: var(--dx-head);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+.reveal .slides section.section header h1::before { content: none; }
+
+.reveal .slides section.section header p {
+  color: var(--dx-muted);
+  margin: 1em 0 0 0;
+  font-size: 0.78em;
+}
+
+.reveal .slides section.section footer {
+  border-top-color: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.3);
+}
+.reveal .slides section.section footer .slideno { color: var(--dx-accent); }
+
+.reveal .slides section.section > .content { padding: 0; }
+
+/* ============================================================
+   QUOTE SLIDE
+   ============================================================ */
+
+.reveal .slides section.quote {
+  display: flex !important;
+  flex-direction: column;
+  background: var(--dx-bg-deep);
+}
+.reveal .slides section.quote > header { display: none; }
+.reveal .slides section.quote .content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.55em;
+}
+.reveal .slides section.quote blockquote {
+  border: none;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--dx-head);
+  letter-spacing: -0.01em;
+  line-height: 1.28;
+  max-width: 80%;
+  margin: 0 auto;
+}
+.reveal .slides section.quote blockquote::before {
+  content: '“';
+  display: block;
+  font-family: var(--dx-sans);
+  font-size: 2.4em;
+  color: var(--dx-accent);
+  line-height: 0.4;
+  margin-bottom: 0.2em;
+  text-shadow: 0 0 22px var(--dx-accent-glow);
+}
+.reveal .slides section.quote .attrib {
+  font-family: var(--dx-mono);
+  font-size: 0.5em;
+  color: var(--dx-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 1.4em;
+}
+.reveal .slides section.quote footer { position: relative; }
+
+/* ============================================================
+   MODIFIERS
+   ============================================================ */
+
+.reveal .slides section.centered .content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.reveal .slides section.fullspace .content { padding: 0; }
+
+.reveal .slides section.stack > section:first-of-type footer .slideno::after {
+  content: ' ▾';
+  color: var(--dx-faint);
+}

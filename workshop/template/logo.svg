@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 32" fill="none">
+  <!-- mark: indigo rounded tile with a green "play / run" triangle (run-the-step) -->
+  <rect x="0" y="2" width="28" height="28" rx="8" fill="#4f46e5"/>
+  <path d="M11 9.5 L20 16 L11 22.5 Z" fill="#34d399"/>
+  <!-- wordmark -->
+  <text x="38" y="22" font-family="'Lexend','Helvetica Neue',sans-serif"
+        font-size="17" font-weight="700" letter-spacing="-0.3" fill="#1e1b4b">code<tspan fill="#4f46e5" font-weight="800">forge</tspan></text>
+</svg>

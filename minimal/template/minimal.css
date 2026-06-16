@@ -1,0 +1,726 @@
+/*
+ * minimal.css — Brutally minimal template for focus-mode keynotes
+ *
+ * Aesthetic: "Subtract" — near-monochrome, enormous negative space, one idea
+ *            per slide. ONE typeface family (Familjen Grotesk) across every
+ *            weight; the only colour event is a single small red dot/underline.
+ *            Chrome is reduced to a quiet slide number. Elegance by subtraction.
+ * Fonts:     Familjen Grotesk (everything) · JetBrains Mono (slide number only).
+ * Palette:   #fafafa paper · #111111 ink · #ff3b30 red — and nothing else but
+ *            a ladder of greys.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  --mn-paper:     #fafafa;   /* slide canvas (off-white) */
+  --mn-paper-2:   #f2f2f0;   /* faint surface / code */
+  --mn-ink:       #111111;   /* near-black */
+  --mn-ink-soft:  #2a2a2a;
+  --mn-viewport:  #ececea;   /* area around slides */
+
+  --mn-grey:      #6b6b6b;   /* muted text */
+  --mn-grey-2:    #9a9a98;   /* fainter */
+  --mn-grey-3:    #c9c9c6;   /* hairlines */
+
+  --mn-red:       #ff3b30;   /* the single accent — used like punctuation */
+  --mn-red-soft:  rgba(255, 59, 48, 0.10);
+
+  /* utility colour classes are intentionally collapsed onto the grey ladder
+     and the one red, so they exist but never break the restraint */
+  --mn-positive:  #111111;
+  --mn-negative:  var(--mn-red);
+  --mn-warning:   var(--mn-grey);
+  --mn-neutral:   var(--mn-grey-2);
+
+  --mn-display: 'Familjen Grotesk', system-ui, sans-serif;
+  --mn-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+  --mn-font-base:        1em;
+  --mn-font-h1:          1.7em;
+  --mn-font-h2:          0.78em;
+  --mn-font-h3:          0.92em;
+  --mn-font-title-h1:    4.2em;
+  --mn-font-section-h1:  3.4em;
+  --mn-font-footer:      48%;
+  --mn-font-code:        0.6em;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+.reveal-viewport {
+  background: var(--mn-viewport);
+}
+
+html.print-pdf .reveal .slides section .fragment {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reveal {
+  font-family: var(--mn-display);
+  color: var(--mn-ink);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+.reveal .slides section {
+  height: 100%;
+  text-align: left;
+  border: none;
+  padding: 0;
+  background: var(--mn-paper);
+}
+
+/* the progress bar is the only persistent flash of red */
+.reveal .progress {
+  height: 2px;
+  color: var(--mn-red);
+}
+
+.reveal .controls {
+  color: var(--mn-grey-3);
+}
+
+/* ============================================================
+   SLIDE HEADER  (no bar, no rule — just the title, breathing)
+   ============================================================ */
+
+.reveal .slides section header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 1.6em 2.8em 0 2.8em;
+  position: relative;
+}
+
+.reveal .slides section h1 {
+  font-family: var(--mn-display);
+  font-weight: 600;
+  font-size: var(--mn-font-h1);
+  text-transform: none;
+  color: var(--mn-ink);
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+/* the one accent on a content title: a small red full-stop */
+.reveal .slides section header h1::after {
+  content: '.';
+  color: var(--mn-red);
+}
+
+/* ============================================================
+   CONTENT AREA  (vast margins; content sits low and calm)
+   ============================================================ */
+
+.reveal .slides section .content {
+  padding: 1.1em 2.8em 3.2em 2.8em;
+  line-height: 1.5;
+  font-size: var(--mn-font-base);
+  overflow-wrap: break-word;
+}
+
+/* ============================================================
+   FOOTER  (just a quiet slide number, far bottom-right)
+   ============================================================ */
+
+.reveal .slides section footer {
+  background: transparent;
+  color: var(--mn-grey-2);
+  border: none;
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0 2.8em;
+  height: 46px;
+  line-height: 46px;
+  font-family: var(--mn-mono);
+  font-size: var(--mn-font-footer);
+  letter-spacing: 0.16em;
+  display: flex;
+  align-items: center;
+}
+
+.reveal .slides section footer .label {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--mn-grey-2);
+}
+
+.reveal .slides section footer .label:empty {
+  display: none;
+}
+
+.reveal .slides section footer .notes {
+  display: none;
+}
+
+.reveal .slides section footer .slideno {
+  margin-left: auto;
+  color: var(--mn-grey);
+  font-weight: 500;
+}
+
+/* a tiny red dot trails the slide number — the recurring brand mark */
+.reveal .slides section footer .slideno::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--mn-red);
+  margin-left: 0.7em;
+  vertical-align: middle;
+}
+
+/* hide the empty header the layout plugin injects on title-less slides */
+.reveal .slides section > header:empty {
+  display: none;
+}
+
+/* ============================================================
+   HEADINGS INSIDE CONTENT
+   ============================================================ */
+
+.reveal h2 {
+  font-family: var(--mn-display);
+  font-weight: 600;
+  font-size: var(--mn-font-h2);
+  color: var(--mn-grey);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin: 0.9em 0 0.4em 0;
+}
+
+.reveal h3 {
+  font-family: var(--mn-display);
+  font-weight: 600;
+  font-size: var(--mn-font-h3);
+  color: var(--mn-ink);
+  letter-spacing: -0.01em;
+  margin: 0.7em 0 0.2em 0;
+}
+
+/* ============================================================
+   TEXT, EMPHASIS, LINKS
+   ============================================================ */
+
+.reveal strong { font-weight: 700; color: var(--mn-ink); }
+
+/* emphasis is the only inline place the accent appears in body copy */
+.reveal em {
+  color: var(--mn-ink);
+  font-style: normal;
+  font-weight: 500;
+  background: linear-gradient(var(--mn-red), var(--mn-red)) no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 2px;
+  padding-bottom: 0.04em;
+}
+
+.reveal i { font-style: italic; }
+
+.reveal .slides a {
+  color: var(--mn-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--mn-grey-3);
+  transition: border-color 0.2s ease;
+}
+.reveal .slides a:hover { border-bottom-color: var(--mn-red); }
+
+.reveal blockquote {
+  box-shadow: none;
+  border-left: 2px solid var(--mn-grey-3);
+  background: transparent;
+  font-style: normal;
+  color: var(--mn-ink-soft);
+  padding: 0.2em 1em;
+}
+
+/* ============================================================
+   LISTS  (sparse, hairline markers — no clutter)
+   ============================================================ */
+
+.reveal ol, .reveal dl, .reveal ul {
+  display: block;
+  margin-left: 1.2em;
+}
+
+.reveal ul li, .reveal ol li { margin-bottom: 0.5em; }
+
+.reveal ul { list-style: none; margin-left: 1.2em; }
+
+.reveal ul li::before {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 1px;
+  background: var(--mn-grey-2);
+  vertical-align: middle;
+  margin-left: -1.2em;
+  margin-right: 0.7em;
+}
+
+.reveal ul ul { margin-left: 1.4em; }
+
+.reveal ol li::marker {
+  color: var(--mn-grey-2);
+  font-family: var(--mn-mono);
+  font-weight: 400;
+  font-size: 0.8em;
+}
+
+/* ============================================================
+   TABLES  (rule-only, no fills)
+   ============================================================ */
+
+.reveal table {
+  font-family: var(--mn-display);
+  font-size: 0.92em;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.7em 0;
+}
+
+.reveal table th {
+  background: transparent;
+  color: var(--mn-grey);
+  font-family: var(--mn-display);
+  font-weight: 600;
+  font-size: 0.74em;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 0.5em 0.9em;
+  text-align: left;
+  border: none;
+  border-bottom: 1px solid var(--mn-ink);
+}
+
+.reveal table td {
+  padding: 0.45em 0.9em;
+  border-bottom: 1px solid var(--mn-grey-3);
+  color: var(--mn-ink-soft);
+  vertical-align: top;
+}
+
+.reveal table tr:last-child td { border-bottom: none; }
+
+/* ============================================================
+   CODE  (rare — kept understated)
+   ============================================================ */
+
+.reveal code {
+  font-family: var(--mn-mono);
+  color: var(--mn-ink);
+  font-size: 0.8em;
+  background: var(--mn-paper-2);
+  border-radius: 2px;
+  padding: 0.05em 0.3em;
+}
+
+.reveal pre {
+  box-shadow: none;
+  border: 1px solid var(--mn-grey-3);
+  border-radius: 3px;
+  background: var(--mn-paper-2);
+  margin: 0.8em 0;
+}
+
+.reveal pre code {
+  font-family: var(--mn-mono);
+  font-size: var(--mn-font-code);
+  max-height: 620px;
+  line-height: 1.5;
+  background: transparent;
+  color: var(--mn-ink-soft);
+  padding: 1.1em 1.2em;
+  border-radius: 0;
+}
+
+/* ============================================================
+   UTILITY COLOUR / TYPE CLASSES
+   (collapsed onto the monochrome + single-red discipline)
+   ============================================================ */
+
+.reveal .accent   { color: var(--mn-red); }
+.reveal .blue     { color: var(--mn-grey); }       /* no second colour — stays grey */
+.reveal .amber,
+.reveal .gold     { color: var(--mn-grey); }
+.reveal .muted,
+.reveal .grey     { color: var(--mn-grey); }
+.reveal .small    { font-size: 80%; }
+.reveal .large    { font-size: 230%; line-height: 1.05; letter-spacing: -0.02em; }
+.reveal .plus,
+.reveal .positive { color: var(--mn-ink); font-weight: 600; }
+.reveal .minus,
+.reveal .negative { color: var(--mn-red); font-weight: 600; }
+.reveal .neutral  { color: var(--mn-neutral); }
+
+.reveal .note {
+  font-size: 70%;
+  color: var(--mn-grey-2);
+}
+
+/* a standalone red dot — the brand mark, droppable anywhere */
+.reveal .dot {
+  display: inline-block;
+  width: 0.34em;
+  height: 0.34em;
+  border-radius: 50%;
+  background: var(--mn-red);
+  vertical-align: middle;
+}
+
+/* a thin centred rule for dividing thoughts */
+.reveal .rule {
+  display: block;
+  width: 3em;
+  height: 2px;
+  background: var(--mn-red);
+  border: none;
+  margin: 1.2em 0;
+}
+
+/* small all-caps kicker above a statement */
+.reveal .kicker {
+  display: block;
+  font-family: var(--mn-display);
+  font-weight: 500;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--mn-grey);
+  margin-bottom: 0.6em;
+}
+
+/* lead — an oversized single-line statement, the workhorse of this template */
+.reveal .lead {
+  display: block;
+  font-family: var(--mn-display);
+  font-weight: 600;
+  font-size: 2.6em;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: var(--mn-ink);
+  max-width: 16em;
+}
+
+/* Big metric number */
+.reveal .metric {
+  font-family: var(--mn-display);
+  font-size: 7em;
+  font-weight: 700;
+  color: var(--mn-ink);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  display: block;
+}
+.reveal .metric .unit { font-size: 0.28em; color: var(--mn-grey); font-weight: 500; letter-spacing: 0; }
+.reveal .metric.negative { color: var(--mn-red); }
+
+.reveal .metric-label {
+  font-family: var(--mn-display);
+  font-size: 0.78em;
+  color: var(--mn-grey);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  display: block;
+  margin-top: 0.9em;
+}
+
+/* ============================================================
+   CALLOUT BOXES  (hairline-only; the accent variant carries red)
+   ============================================================ */
+
+.reveal .callout,
+.reveal .warning,
+.reveal .success,
+.reveal .danger {
+  padding: 0.5em 1.1em;
+  margin: 0.7em 0;
+  border-radius: 0;
+  border-left: 2px solid var(--mn-grey-3);
+  background: transparent;
+  color: var(--mn-ink-soft);
+}
+.reveal .warning { border-left-color: var(--mn-grey); }
+.reveal .success { border-left-color: var(--mn-ink); }
+.reveal .danger  { border-left-color: var(--mn-red); }
+
+.reveal .cite {
+  border: none;
+  border-top: 1px solid var(--mn-grey-3);
+  background: transparent;
+  padding: 0.5em 0 0 0;
+  margin: 0.8em 0;
+  font-size: 70%;
+  color: var(--mn-grey-2);
+}
+
+.reveal .box {
+  background: var(--mn-paper);
+  border: 1px solid var(--mn-grey-3);
+  border-radius: 3px;
+  padding: 0.9em 1.1em;
+}
+
+.reveal .shadow {
+  border: 1px solid var(--mn-grey-3);
+  border-radius: 3px;
+  box-shadow: 0 10px 40px rgba(17, 17, 17, 0.06);
+}
+
+/* ============================================================
+   COLUMNS & FLOATS
+   ============================================================ */
+
+.reveal .col {
+  width: 46%;
+  float: left;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.reveal .img-right {
+  float: right;
+  margin: 0.4em 0 1em 1.6em;
+  max-width: 42%;
+}
+
+/* ============================================================
+   TITLE SLIDE
+   (layout plugin splits the slide into <header> + .content;
+    header holds the topbar + title block, content holds authors)
+   ============================================================ */
+
+.reveal .slides section.title {
+  background: var(--mn-paper);
+  display: flex !important;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.reveal .slides section.title > header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 3.4em 3.6em 0 3.6em;
+}
+
+.reveal .slides section.title .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reveal .slides section.title .logo {
+  display: inline-block;
+  background: url('logo.svg') no-repeat left center;
+  background-size: contain;
+  height: 1.6em;
+  width: 9em;
+}
+
+.reveal .slides section.title .coords {
+  font-family: var(--mn-mono);
+  font-size: 0.5em;
+  color: var(--mn-grey-2);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* margin-top:auto drops the title block to the lower-left, leaving the
+   whole top of the slide as deliberate empty space */
+.reveal .slides section.title .eyebrow {
+  font-family: var(--mn-display);
+  font-size: 0.72em;
+  font-weight: 500;
+  color: var(--mn-grey);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  margin: auto 0 1em 0;
+}
+
+.reveal .slides section.title h1 {
+  font-family: var(--mn-display);
+  font-weight: 700;
+  font-size: var(--mn-font-title-h1);
+  color: var(--mn-ink);
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+  margin: 0;
+}
+/* the word gets the single red full-stop — the entire brand statement */
+.reveal .slides section.title h1::after {
+  content: '.';
+  color: var(--mn-red);
+}
+
+.reveal .slides section.title .subtitle {
+  font-size: 1em;
+  color: var(--mn-grey);
+  margin-top: 0.9em;
+  font-weight: 400;
+  max-width: 22em;
+}
+
+.reveal .slides section.title .content {
+  flex: none;
+  padding: 1.4em 3.6em 3.2em 3.6em;
+}
+
+.reveal .slides section.title .authors {
+  font-size: 0.82em;
+  border-top: 1px solid var(--mn-grey-3);
+  padding-top: 1.2em;
+  display: flex;
+  gap: 3em;
+}
+.reveal .slides section.title .authors .who { font-weight: 600; color: var(--mn-ink); }
+.reveal .slides section.title .authors .role {
+  font-family: var(--mn-display);
+  font-size: 0.78em;
+  color: var(--mn-grey);
+  letter-spacing: 0.02em;
+  display: block;
+  margin-top: 0.2em;
+}
+
+.reveal .slides section.title footer { display: none; }
+
+/* ============================================================
+   SECTION SLIDE  (inverted — near-black, white text, the red dot)
+   ============================================================ */
+
+.reveal .slides section.section {
+  background: var(--mn-ink);
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reveal .slides section.section header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0 3.6em;
+  position: relative;
+  z-index: 1;
+}
+
+.reveal .slides section.section .eyebrow {
+  font-family: var(--mn-display);
+  font-size: 0.72em;
+  font-weight: 500;
+  color: var(--mn-grey-2);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}
+
+.reveal .slides section.section header h1 {
+  font-family: var(--mn-display);
+  font-weight: 700;
+  font-size: var(--mn-font-section-h1);
+  color: var(--mn-paper);
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+/* the lone red dot — section's only colour */
+.reveal .slides section.section header h1::after {
+  content: '.';
+  color: var(--mn-red);
+}
+
+.reveal .slides section.section header p {
+  color: var(--mn-grey-2);
+  margin: 1.4em 0 0 0;
+  font-size: 0.8em;
+  max-width: 30em;
+}
+.reveal .slides section.section header a {
+  color: var(--mn-paper);
+  border-bottom-color: var(--mn-grey);
+}
+.reveal .slides section.section header a:hover { border-bottom-color: var(--mn-red); }
+
+.reveal .slides section.section footer {
+  color: rgba(250, 250, 250, 0.4);
+}
+.reveal .slides section.section footer .slideno { color: rgba(250, 250, 250, 0.55); }
+
+/* collapse the empty .content the layout plugin leaves on divider slides */
+.reveal .slides section.section > .content { padding: 0; }
+
+/* ============================================================
+   QUOTE SLIDE  (centred pull quote, no chrome)
+   ============================================================ */
+
+.reveal .slides section.quote {
+  display: flex !important;
+  flex-direction: column;
+}
+.reveal .slides section.quote > header { display: none; }
+.reveal .slides section.quote .content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 2em 4em 3em 4em;
+}
+.reveal .slides section.quote blockquote {
+  border: none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.4em;
+  color: var(--mn-ink);
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  max-width: 18em;
+  margin: 0 auto;
+}
+/* one small red dot opens the quote */
+.reveal .slides section.quote blockquote::before {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--mn-red);
+  margin: 0 auto 0.7em auto;
+}
+.reveal .slides section.quote .attrib {
+  font-family: var(--mn-display);
+  font-size: 0.62em;
+  color: var(--mn-grey);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-top: 1.8em;
+}
+.reveal .slides section.quote footer { position: relative; }
+
+/* ============================================================
+   MODIFIERS
+   ============================================================ */
+
+.reveal .slides section.centered .content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.reveal .slides section.fullspace .content { padding: 0; }

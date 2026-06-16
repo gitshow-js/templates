@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 32" fill="none">
+  <!-- mark: crimson square with a serif initial, like a magazine masthead device -->
+  <rect x="0" y="2" width="28" height="28" fill="#c1121f"/>
+  <text x="14" y="24" text-anchor="middle"
+        font-family="'DM Serif Display','Georgia',serif"
+        font-size="20" fill="#f7f5f2">G</text>
+  <!-- wordmark -->
+  <text x="38" y="23" font-family="'DM Serif Display','Georgia',serif"
+        font-size="20" letter-spacing="0.5" fill="#15110e">GRAIN<tspan font-family="'Saira Condensed','Arial Narrow',sans-serif" font-size="10" font-weight="600" letter-spacing="2" fill="#c1121f" dy="-7"> №04</tspan></text>
+</svg>

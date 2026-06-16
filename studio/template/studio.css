@@ -1,0 +1,808 @@
+/*
+ * studio.css — Dark art-directed gallery template
+ *
+ * Aesthetic: "Gallery after dark" — a near-black curatorial canvas with subtle
+ *            film-grain + vignette, oversized Syne display type that lets work
+ *            breathe, mono indices like a catalogue, and ONE vivid acid-lime
+ *            accent used as a spotlight. Bold geometric colour-block dividers.
+ * Fonts:     Syne (display, heavy weights) · Manrope (body) · Space Mono
+ *            (indices, captions, footer, tags).
+ * Palette:   #0e0e10 canvas · #f4f3ee off-white · #c6ff3a acid lime (the one
+ *            accent) · #6f86ff cool blue secondary.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  --st-bg:          #0e0e10;   /* gallery canvas */
+  --st-bg-2:        #161618;   /* raised surface / frame fill base */
+  --st-bg-3:        #1e1e22;   /* zebra / code surface */
+  --st-viewport:    #050506;   /* area around slides */
+
+  --st-text:        #f4f3ee;   /* off-white */
+  --st-text-2:      #d6d4cc;
+  --st-muted:       #8d8b84;
+  --st-faint:       #5a5852;
+
+  --st-accent:      #c6ff3a;   /* acid lime — the one vivid accent */
+  --st-accent-dim:  rgba(198, 255, 58, 0.16);
+  --st-blue:        #6f86ff;   /* cool secondary */
+  --st-blue-dim:    rgba(111, 134, 255, 0.16);
+
+  --st-border:      #2a2a2e;
+  --st-border-2:    #3a3a40;
+
+  --st-positive:    #8fe388;
+  --st-negative:    #ff7a7a;
+  --st-warning:     #e8b04b;
+  --st-neutral:     #8d8b84;
+
+  --st-display: 'Syne', 'Arial Black', sans-serif;
+  --st-body:    'Manrope', system-ui, sans-serif;
+  --st-mono:    'Space Mono', ui-monospace, monospace;
+
+  --st-font-base:        0.96em;
+  --st-font-h1:          1.55em;
+  --st-font-h2:          0.82em;
+  --st-font-h3:          0.8em;
+  --st-font-title-h1:    3.4em;
+  --st-font-section-h1:  3.8em;
+  --st-font-footer:      52%;
+  --st-font-code:        0.6em;
+}
+
+/* ============================================================
+   BASE  —  canvas, film grain, vignette
+   ============================================================ */
+
+.reveal-viewport {
+  background: var(--st-viewport);
+}
+
+html.print-pdf .reveal .slides section .fragment {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reveal {
+  font-family: var(--st-body);
+  color: var(--st-text);
+  font-weight: 400;
+}
+
+.reveal .slides section {
+  height: 100%;
+  text-align: left;
+  border: none;
+  padding: 0;
+  background: var(--st-bg);
+  /* layered depth: soft top spotlight + corner vignette */
+  background-image:
+    radial-gradient(120% 80% at 78% -10%, rgba(198, 255, 58, 0.05), transparent 55%),
+    radial-gradient(90% 90% at 50% 120%, rgba(0, 0, 0, 0.5), transparent 60%);
+}
+
+/* film-grain texture layer over every slide */
+.reveal .slides section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+.reveal .progress {
+  height: 3px;
+  color: var(--st-accent);
+}
+
+.reveal .controls {
+  color: var(--st-accent);
+}
+
+/* keep authored content above the grain layer */
+.reveal .slides section > * { position: relative; z-index: 1; }
+
+/* ============================================================
+   SLIDE HEADER  (auto-wrapped by the layout plugin)
+   ============================================================ */
+
+.reveal .slides section header {
+  background: transparent;
+  padding: 0.85em 1.6em 0.5em 1.6em;
+  position: relative;
+}
+
+/* acid-lime tick anchored under the title */
+.reveal .slides section header::after {
+  content: '';
+  position: absolute;
+  left: 1.65em;
+  bottom: 0;
+  width: 2.4em;
+  height: 4px;
+  background: var(--st-accent);
+}
+
+.reveal .slides section h1 {
+  font-family: var(--st-display);
+  font-weight: 800;
+  font-size: var(--st-font-h1);
+  text-transform: none;
+  color: var(--st-text);
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   CONTENT AREA
+   ============================================================ */
+
+.reveal .slides section .content {
+  padding: 1.2em 1.75em 3.2em 1.75em;
+  line-height: 1.55;
+  font-size: var(--st-font-base);
+  overflow-wrap: break-word;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.reveal .slides section footer {
+  background: transparent;
+  color: var(--st-muted);
+  border-top: 1px solid var(--st-border);
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0 1.65em;
+  height: 40px;
+  line-height: 40px;
+  font-family: var(--st-mono);
+  font-size: var(--st-font-footer);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.reveal .slides section footer .label {
+  text-transform: uppercase;
+}
+
+.reveal .slides section footer .label:empty {
+  display: none;
+}
+
+.reveal .slides section footer .notes {
+  display: none;
+}
+
+.reveal .slides section footer .slideno {
+  margin-left: auto;
+  color: var(--st-accent);
+  font-weight: 700;
+}
+.reveal .slides section footer .slideno::before {
+  content: '— ';
+  color: var(--st-faint);
+}
+
+/* hide the stray empty header on title-less content slides */
+.reveal .slides section > header:empty {
+  display: none;
+}
+
+/* ============================================================
+   HEADINGS INSIDE CONTENT
+   ============================================================ */
+
+.reveal h2 {
+  font-family: var(--st-mono);
+  font-weight: 700;
+  font-size: var(--st-font-h2);
+  color: var(--st-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin: 0.6em 0 0.4em 0;
+}
+
+.reveal h3 {
+  font-family: var(--st-display);
+  font-weight: 700;
+  font-size: var(--st-font-h3);
+  color: var(--st-text);
+  margin: 0.6em 0 0.2em 0;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   TEXT, EMPHASIS, LINKS
+   ============================================================ */
+
+.reveal strong { font-weight: 700; color: var(--st-text); }
+
+.reveal em {
+  color: var(--st-accent);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.reveal i { font-style: italic; }
+
+.reveal .slides a {
+  color: var(--st-accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--st-accent-dim);
+  transition: border-color 0.2s ease;
+}
+.reveal .slides a:hover { border-bottom-color: var(--st-accent); }
+
+.reveal blockquote {
+  box-shadow: none;
+  border-left: 3px solid var(--st-border-2);
+  background: transparent;
+  font-style: italic;
+  color: var(--st-text-2);
+  padding: 0.2em 1em;
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+.reveal ol, .reveal dl, .reveal ul {
+  display: block;
+  margin-left: 1.2em;
+}
+
+.reveal ul li, .reveal ol li { margin-bottom: 0.3em; }
+
+.reveal ul { list-style: none; margin-left: 1.4em; }
+
+.reveal ul li::before {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.55em;
+  margin-left: -1.05em;
+  background: var(--st-accent);
+  vertical-align: middle;
+}
+
+.reveal ul ul { margin-left: 1.5em; }
+.reveal ul ul li::before { background: var(--st-faint); width: 0.42em; height: 0.42em; }
+
+.reveal ol li::marker {
+  color: var(--st-accent);
+  font-family: var(--st-mono);
+  font-weight: 700;
+  font-size: 0.85em;
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+
+.reveal table {
+  font-family: var(--st-body);
+  font-size: 0.86em;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.6em 0;
+}
+
+.reveal table th {
+  background: transparent;
+  color: var(--st-accent);
+  font-family: var(--st-mono);
+  font-weight: 700;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.5em 0.9em;
+  text-align: left;
+  border: none;
+  border-bottom: 2px solid var(--st-border-2);
+}
+
+.reveal table td {
+  padding: 0.45em 0.9em;
+  border-bottom: 1px solid var(--st-border);
+  color: var(--st-text-2);
+  vertical-align: top;
+}
+
+.reveal table tr:last-child td { border-bottom: 2px solid var(--st-border-2); }
+
+/* ============================================================
+   CODE
+   ============================================================ */
+
+.reveal code {
+  font-family: var(--st-mono);
+  color: var(--st-accent);
+  font-size: 0.82em;
+  background: var(--st-bg-3);
+  border-radius: 3px;
+  padding: 0.05em 0.32em;
+}
+
+.reveal pre {
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--st-border);
+  border-radius: 4px;
+  background: var(--st-bg-2);
+  margin: 0.7em 0;
+  position: relative;
+}
+
+.reveal pre code {
+  font-family: var(--st-mono);
+  font-size: var(--st-font-code);
+  max-height: 620px;
+  line-height: 1.5;
+  background: transparent;
+  color: var(--st-text-2);
+  padding: 1.2em 1.3em;
+  border-radius: 0;
+}
+
+/* ============================================================
+   UTILITY COLOUR / TYPE CLASSES
+   ============================================================ */
+
+.reveal .accent   { color: var(--st-accent); }
+.reveal .orange   { color: var(--st-accent); }   /* spec maps orange → vivid accent */
+.reveal .blue     { color: var(--st-blue); }
+.reveal .amber,
+.reveal .gold     { color: var(--st-warning); }
+.reveal .muted,
+.reveal .grey     { color: var(--st-muted); }
+.reveal .small    { font-size: 82%; }
+.reveal .large    { font-size: 230%; line-height: 1.05; }
+.reveal .plus,
+.reveal .positive { color: var(--st-positive); font-weight: 600; }
+.reveal .minus,
+.reveal .negative { color: var(--st-negative); font-weight: 600; }
+.reveal .neutral  { color: var(--st-neutral); }
+
+.reveal .note {
+  font-size: 70%;
+  color: var(--st-faint);
+  font-family: var(--st-mono);
+}
+
+/* Big metric number — for results lines */
+.reveal .metric {
+  font-family: var(--st-display);
+  font-size: 3.2em;
+  font-weight: 800;
+  color: var(--st-text);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  display: block;
+}
+.reveal .metric .unit { font-size: 0.36em; color: var(--st-muted); font-weight: 600; }
+
+.reveal .metric-label {
+  font-family: var(--st-mono);
+  font-size: 0.62em;
+  color: var(--st-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  display: block;
+  margin-top: 0.4em;
+}
+
+/* ============================================================
+   STUDIO EXTRAS — frame · index · caption · tag
+   ============================================================ */
+
+/* image / work placeholder frame — geometric, no external assets */
+.reveal .frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--st-border-2);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  /* layered colour-block "artwork": diagonal bands + lime block + grid */
+  background-color: var(--st-bg-2);
+  background-image:
+    linear-gradient(135deg, transparent 49.4%, var(--st-accent) 49.4%, var(--st-accent) 50.6%, transparent 50.6%),
+    radial-gradient(60% 100% at 100% 0%, var(--st-blue-dim), transparent 60%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 48px),
+    linear-gradient(160deg, #232327, #131315);
+}
+/* corner crop marks, gallery-style */
+.reveal .frame::before,
+.reveal .frame::after {
+  content: '';
+  position: absolute;
+  width: 22px; height: 22px;
+  border: 2px solid var(--st-accent);
+}
+.reveal .frame::before { top: 14px; left: 14px; border-right: none; border-bottom: none; }
+.reveal .frame::after  { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+
+/* a frame with a cool-blue artwork variant */
+.reveal .frame.blue {
+  background-image:
+    linear-gradient(45deg, transparent 49.4%, var(--st-blue) 49.4%, var(--st-blue) 50.6%, transparent 50.6%),
+    radial-gradient(70% 100% at 0% 100%, var(--st-accent-dim), transparent 60%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 48px),
+    linear-gradient(160deg, #1d1f2b, #121318);
+}
+.reveal .frame.blue::before,
+.reveal .frame.blue::after { border-color: var(--st-blue); }
+
+/* mono catalogue index — e.g. 01 / 06 */
+.reveal .index {
+  font-family: var(--st-mono);
+  font-weight: 700;
+  font-size: 0.78em;
+  color: var(--st-accent);
+  letter-spacing: 0.12em;
+  display: inline-block;
+}
+.reveal .index .total { color: var(--st-faint); }
+
+/* small project caption beneath a frame */
+.reveal .caption {
+  font-family: var(--st-mono);
+  font-size: 0.62em;
+  color: var(--st-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0.5em 0 0 0;
+}
+
+/* discipline pill */
+.reveal .tag {
+  display: inline-block;
+  font-family: var(--st-mono);
+  font-size: 0.6em;
+  font-weight: 400;
+  background: transparent;
+  color: var(--st-text-2);
+  border: 1px solid var(--st-border-2);
+  border-radius: 999px;
+  padding: 0.22em 0.7em;
+  margin: 0.16em 0.18em 0.16em 0;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.reveal .tag.accent { border-color: var(--st-accent); color: var(--st-accent); }
+.reveal .tag.blue   { border-color: var(--st-blue); color: var(--st-blue); }
+
+/* ============================================================
+   CALLOUT BOXES
+   ============================================================ */
+
+.reveal .callout,
+.reveal .warning,
+.reveal .success,
+.reveal .danger {
+  padding: 0.6em 1em;
+  margin: 0.6em 0;
+  border-radius: 0 4px 4px 0;
+  border-left: 4px solid var(--st-accent);
+  background: var(--st-accent-dim);
+  color: var(--st-text);
+}
+.reveal .warning { border-left-color: var(--st-warning); background: rgba(232, 176, 75, 0.1); }
+.reveal .success { border-left-color: var(--st-positive); background: rgba(143, 227, 136, 0.1); }
+.reveal .danger  { border-left-color: var(--st-negative); background: rgba(255, 122, 122, 0.1); }
+
+.reveal .cite {
+  border: 1px solid var(--st-border);
+  border-radius: 4px;
+  background: var(--st-bg-2);
+  padding: 0.4em 0.9em;
+  margin: 0.6em 0;
+  font-size: 72%;
+  color: var(--st-muted);
+  font-family: var(--st-mono);
+}
+
+.reveal .box {
+  background: var(--st-bg-2);
+  border: 1px solid var(--st-border);
+  border-radius: 4px;
+  padding: 0.9em 1.1em;
+}
+
+.reveal .shadow {
+  border: 1px solid var(--st-border);
+  border-radius: 4px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+}
+
+/* ============================================================
+   COLUMNS & FLOATS
+   ============================================================ */
+
+.reveal .col {
+  width: 46%;
+  float: left;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.reveal .img-right {
+  float: right;
+  margin: 0.4em 0 1em 1.6em;
+  max-width: 46%;
+}
+
+/* ============================================================
+   TITLE SLIDE
+   ============================================================ */
+
+.reveal .slides section.title {
+  background: var(--st-bg);
+  background-image:
+    radial-gradient(80% 60% at 85% 8%, rgba(198, 255, 58, 0.1), transparent 60%),
+    radial-gradient(70% 70% at 0% 110%, rgba(111, 134, 255, 0.08), transparent 60%);
+  display: flex !important;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.reveal .slides section.title > header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2.6em 2.8em 0 2.8em;
+}
+.reveal .slides section.title > header::after { display: none; }
+
+.reveal .slides section.title .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reveal .slides section.title .logo {
+  display: inline-block;
+  background: url('logo.svg') no-repeat left center;
+  background-size: contain;
+  height: 1.7em;
+  width: 11em;
+}
+
+.reveal .slides section.title .coords {
+  font-family: var(--st-mono);
+  font-size: 0.55em;
+  color: var(--st-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.reveal .slides section.title .eyebrow {
+  font-family: var(--st-mono);
+  font-size: 0.6em;
+  font-weight: 400;
+  color: var(--st-accent);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin: auto 0 0.9em 0;
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+.reveal .slides section.title .eyebrow::before {
+  content: '';
+  width: 2.6em;
+  height: 2px;
+  background: var(--st-accent);
+}
+
+.reveal .slides section.title h1 {
+  font-family: var(--st-display);
+  font-weight: 800;
+  font-size: var(--st-font-title-h1);
+  color: var(--st-text);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.reveal .slides section.title h1::before { content: none; }
+
+.reveal .slides section.title .subtitle {
+  font-size: 1em;
+  color: var(--st-muted);
+  margin-top: 0.7em;
+  font-weight: 400;
+  max-width: 26em;
+}
+
+.reveal .slides section.title .content {
+  flex: none;
+  padding: 1.1em 2.8em 2.8em 2.8em;
+}
+
+.reveal .slides section.title .authors {
+  font-size: 0.82em;
+  border-top: 1px solid var(--st-border);
+  padding-top: 1.1em;
+  display: flex;
+  gap: 2.6em;
+}
+.reveal .slides section.title .authors .who { font-weight: 700; color: var(--st-text); }
+.reveal .slides section.title .authors .role {
+  font-family: var(--st-mono);
+  font-size: 0.66em;
+  color: var(--st-muted);
+  letter-spacing: 0.04em;
+  display: block;
+  margin-top: 0.2em;
+}
+
+.reveal .slides section.title footer { display: none; }
+
+/* ============================================================
+   SECTION SLIDE  (bold geometric colour-block divider)
+   ============================================================ */
+
+.reveal .slides section.section {
+  background: var(--st-accent);
+  background-image: none;
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+.reveal .slides section.section::after { opacity: 0.25; } /* grain still reads on lime */
+
+/* giant offset black block on the right for the colour-block split */
+.reveal .slides section.section::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 38%; height: 100%;
+  background: var(--st-bg);
+  z-index: 0;
+}
+
+.reveal .slides section.section header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0 2.8em;
+  position: relative;
+  z-index: 1;
+  max-width: 64%;
+}
+.reveal .slides section.section header::after {
+  content: '';
+  position: absolute;
+  left: 2.85em; bottom: -0.7em;
+  width: 4em; height: 5px;
+  background: var(--st-bg);
+}
+
+.reveal .slides section.section .eyebrow {
+  font-family: var(--st-mono);
+  font-size: 0.62em;
+  color: var(--st-bg);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  margin-bottom: 0.6em;
+  font-weight: 700;
+}
+
+.reveal .slides section.section header h1 {
+  font-family: var(--st-display);
+  font-weight: 800;
+  font-size: var(--st-font-section-h1);
+  color: var(--st-bg);
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+.reveal .slides section.section header h1::before { content: none; }
+
+.reveal .slides section.section header p {
+  color: rgba(14, 14, 16, 0.7);
+  margin: 1.1em 0 0 0;
+  font-size: 0.42em;
+  font-family: var(--st-mono);
+  letter-spacing: 0.02em;
+  max-width: 30em;
+}
+
+.reveal .slides section.section footer {
+  border-top-color: rgba(14, 14, 16, 0.2);
+  color: rgba(14, 14, 16, 0.55);
+}
+.reveal .slides section.section footer .slideno { color: var(--st-bg); }
+.reveal .slides section.section footer .slideno::before { color: rgba(14,14,16,0.4); }
+
+.reveal .slides section.section > .content { padding: 0; }
+
+/* ============================================================
+   QUOTE SLIDE
+   ============================================================ */
+
+.reveal .slides section.quote {
+  display: flex !important;
+  flex-direction: column;
+}
+.reveal .slides section.quote > header { display: none; }
+.reveal .slides section.quote .content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  font-size: 1.7em;
+  padding-left: 2.8rem;
+  padding-right: 2.8rem;
+}
+.reveal .slides section.quote blockquote {
+  border: none;
+  font-family: var(--st-display);
+  font-style: normal;
+  font-weight: 700;
+  color: var(--st-text);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  max-width: 92%;
+  margin: 0;
+}
+.reveal .slides section.quote blockquote::before {
+  content: '“';
+  display: block;
+  font-family: var(--st-display);
+  font-size: 2.2em;
+  color: var(--st-accent);
+  line-height: 0.4;
+  margin-bottom: 0.15em;
+}
+.reveal .slides section.quote .attrib {
+  font-family: var(--st-mono);
+  font-size: 0.42em;
+  color: var(--st-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-top: 1.6em;
+}
+.reveal .slides section.quote footer { position: relative; }
+
+/* ============================================================
+   MODIFIERS
+   ============================================================ */
+
+.reveal .slides section.centered .content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.reveal .slides section.fullspace .content { padding: 0; }
+
+/* vertical-stack indicator */
+.reveal .slides section.stack > section:first-of-type footer .slideno::after {
+  content: ' ▾';
+  color: var(--st-faint);
+}

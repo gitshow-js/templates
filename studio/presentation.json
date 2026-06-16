@@ -1,0 +1,20 @@
+{
+    "id": "studio_sample",
+    "title": "Selected Works 2026",
+    "author": "Studio FORMWORK",
+    "lang": "en",
+    "template": {
+        "name": "studio",
+        "properties": {
+            "footer": "FORMWORK · Selected Works 2026"
+        }
+    },
+    "contents": [
+        "00title.md",
+        "10index.md",
+        "20case-halden.md",
+        "30case-meridian.md",
+        "40services.md",
+        "99contact.md"
+    ]
+}

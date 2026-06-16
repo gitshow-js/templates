@@ -1,0 +1,763 @@
+/*
+ * lecture.css — Warm, friendly template for classroom lectures & online courses
+ *
+ * Aesthetic: "Sunlit chalkboard" — calm warm-cream canvas with a soft radial
+ *            glow, rounded friendly headings, generous type readable from the
+ *            back row, gentle teal accent with a warm coral secondary. Section
+ *            dividers use a deep teal for a friendly breath of colour.
+ * Fonts:     Baloo 2 (rounded display) · Nunito Sans (body) · Spline Sans Mono
+ *            (code, labels, slide numbers).
+ * Palette:   #fbf6ee cream · #2c2620 warm-brown ink · #2a9d8f teal · #e76f51 coral
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400;1,6..12,600&family=Spline+Sans+Mono:wght@400;500;600&display=swap');
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  --lec-bg:          #fbf6ee;   /* warm cream canvas */
+  --lec-bg-alt:      #f3ebde;   /* zebra / surface tint */
+  --lec-surface:     #fffdf8;   /* cards */
+  --lec-viewport:    #ece1cf;   /* area around slides */
+
+  --lec-ink:         #2c2620;   /* warm dark brown — headings */
+  --lec-ink-2:       #43392f;
+  --lec-text:        #4a4038;   /* body text */
+  --lec-muted:       #8a7d6e;
+  --lec-faint:       #b3a594;
+
+  --lec-teal:        #2a9d8f;   /* friendly primary accent */
+  --lec-teal-deep:   #1f7a6f;
+  --lec-teal-soft:   #d8efeb;
+  --lec-coral:       #e76f51;   /* warm secondary */
+  --lec-coral-soft:  #fbe3da;
+
+  --lec-border:      #e6dccb;
+  --lec-border-2:    #d8cbb4;
+
+  --lec-positive:    #5a9d4e;   /* warm leaf green */
+  --lec-negative:    #e76f51;   /* coral */
+  --lec-warning:     #d99a3c;   /* amber */
+  --lec-neutral:     #a99c8b;
+
+  --lec-display: 'Baloo 2', 'Trebuchet MS', sans-serif;
+  --lec-body:    'Nunito Sans', 'Segoe UI', sans-serif;
+  --lec-mono:    'Spline Sans Mono', ui-monospace, monospace;
+
+  --lec-font-base:        1.06em;   /* generous, readable from the back */
+  --lec-font-h1:          1.55em;
+  --lec-font-h2:          1.02em;
+  --lec-font-h3:          0.86em;
+  --lec-font-title-h1:    2.4em;
+  --lec-font-section-h1:  2.5em;
+  --lec-font-footer:      54%;
+  --lec-font-code:        0.66em;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+.reveal-viewport {
+  background:
+    radial-gradient(circle at 50% 18%, #f4e9d6 0%, var(--lec-viewport) 78%);
+}
+
+html.print-pdf .reveal .slides section .fragment {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reveal {
+  font-family: var(--lec-body);
+  color: var(--lec-text);
+  font-weight: 400;
+}
+
+.reveal .slides section {
+  height: 100%;
+  text-align: left;
+  border: none;
+  padding: 0;
+  background: var(--lec-bg);
+  /* soft warm glow from upper-left, like sunlight on paper */
+  background-image:
+    radial-gradient(circle at 14% 8%, rgba(42, 157, 143, 0.06), transparent 42%),
+    radial-gradient(circle at 92% 96%, rgba(231, 111, 81, 0.05), transparent 46%);
+}
+
+.reveal .progress {
+  height: 4px;
+  color: var(--lec-teal);
+}
+
+.reveal .controls {
+  color: var(--lec-teal);
+}
+
+/* ============================================================
+   SLIDE HEADER  (warm bar, rounded title, teal underline tab)
+   ============================================================ */
+
+.reveal .slides section header {
+  background: var(--lec-surface);
+  padding: 0.62em 1.7em 0.5em 1.7em;
+  position: relative;
+  border-bottom: 1px solid var(--lec-border);
+}
+
+/* friendly teal rounded tab anchored bottom-left of the header rule */
+.reveal .slides section header::after {
+  content: '';
+  position: absolute;
+  left: 1.75em;
+  bottom: -3px;
+  width: 2.4em;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--lec-teal);
+}
+
+.reveal .slides section h1 {
+  font-family: var(--lec-display);
+  font-weight: 700;
+  font-size: var(--lec-font-h1);
+  text-transform: none;
+  color: var(--lec-ink);
+  margin: 0;
+  line-height: 1.16;
+  letter-spacing: -0.005em;
+}
+
+/* ============================================================
+   CONTENT AREA
+   ============================================================ */
+
+.reveal .slides section .content {
+  padding: 1.2em 2em 3.2em 2em;
+  line-height: 1.55;
+  font-size: var(--lec-font-base);
+  overflow-wrap: break-word;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.reveal .slides section footer {
+  background: transparent;
+  color: var(--lec-muted);
+  border-top: 1px solid var(--lec-border);
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0 1.75em;
+  height: 42px;
+  line-height: 42px;
+  font-family: var(--lec-mono);
+  font-size: var(--lec-font-footer);
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+}
+
+.reveal .slides section footer .label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.reveal .slides section footer .label:empty {
+  display: none;
+}
+
+.reveal .slides section footer .notes {
+  display: none;
+}
+
+.reveal .slides section footer .slideno {
+  margin-left: auto;
+  color: var(--lec-teal);
+  font-weight: 600;
+}
+.reveal .slides section footer .slideno::before {
+  content: '◆ ';
+  color: var(--lec-faint);
+}
+
+/* hide the stray empty <header> the layout plugin inserts on title-less slides */
+.reveal .slides section > header:empty {
+  display: none;
+}
+
+/* ============================================================
+   HEADINGS INSIDE CONTENT
+   ============================================================ */
+
+.reveal h2 {
+  font-family: var(--lec-display);
+  font-weight: 700;
+  font-size: var(--lec-font-h2);
+  color: var(--lec-teal-deep);
+  margin: 0.7em 0 0.3em 0;
+  letter-spacing: 0;
+}
+
+.reveal h3 {
+  font-family: var(--lec-display);
+  font-weight: 600;
+  font-size: var(--lec-font-h3);
+  color: var(--lec-ink-2);
+  margin: 0.6em 0 0.2em 0;
+}
+
+/* ============================================================
+   TEXT, EMPHASIS, LINKS
+   ============================================================ */
+
+.reveal strong { font-weight: 700; color: var(--lec-ink); }
+
+.reveal em {
+  color: var(--lec-coral);
+  font-style: inherit;
+  font-weight: 600;
+}
+
+.reveal i { font-style: italic; }
+
+.reveal .slides a {
+  color: var(--lec-teal-deep);
+  text-decoration: none;
+  border-bottom: 2px solid var(--lec-teal-soft);
+  transition: border-color 0.2s ease;
+}
+.reveal .slides a:hover { border-bottom-color: var(--lec-teal); }
+
+.reveal blockquote {
+  box-shadow: none;
+  border-left: 4px solid var(--lec-border-2);
+  border-radius: 0 8px 8px 0;
+  background: var(--lec-bg-alt);
+  font-style: italic;
+  color: var(--lec-ink-2);
+  padding: 0.4em 1.1em;
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+.reveal ol, .reveal dl, .reveal ul {
+  display: block;
+  margin-left: 1.2em;
+}
+
+.reveal ul li, .reveal ol li { margin-bottom: 0.4em; }
+
+.reveal ul { list-style: none; margin-left: 1.5em; }
+
+.reveal ul li::before {
+  content: '●';
+  color: var(--lec-teal);
+  font-size: 0.6em;
+  display: inline-block;
+  width: 1.5em;
+  margin-left: -1.5em;
+  vertical-align: middle;
+  position: relative;
+  top: -0.18em;
+}
+
+.reveal ul ul { margin-left: 1.5em; }
+.reveal ul ul li::before { content: '○'; color: var(--lec-coral); }
+
+.reveal ol li::marker {
+  color: var(--lec-coral);
+  font-family: var(--lec-display);
+  font-weight: 700;
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+
+.reveal table {
+  font-family: var(--lec-body);
+  font-size: 0.92em;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.7em 0;
+}
+
+.reveal table th {
+  background: var(--lec-teal);
+  color: #fffdf8;
+  font-family: var(--lec-display);
+  font-weight: 600;
+  font-size: 0.86em;
+  padding: 0.5em 0.95em;
+  text-align: left;
+  border: none;
+}
+.reveal table th:first-child { border-radius: 8px 0 0 0; }
+.reveal table th:last-child  { border-radius: 0 8px 0 0; }
+
+.reveal table td {
+  padding: 0.46em 0.95em;
+  border-bottom: 1px solid var(--lec-border);
+  color: var(--lec-text);
+  vertical-align: top;
+}
+
+.reveal table tr:nth-child(even) td { background: var(--lec-bg-alt); }
+.reveal table tr:last-child td { border-bottom: 2px solid var(--lec-border-2); }
+
+/* ============================================================
+   CODE
+   ============================================================ */
+
+.reveal code {
+  font-family: var(--lec-mono);
+  color: var(--lec-coral);
+  font-size: 0.86em;
+  background: var(--lec-bg-alt);
+  border-radius: 5px;
+  padding: 0.08em 0.34em;
+}
+
+.reveal pre {
+  box-shadow: 0 8px 26px rgba(44, 38, 32, 0.1);
+  border: 1px solid var(--lec-border);
+  border-radius: 12px;
+  background: var(--lec-surface);
+  margin: 0.8em 0;
+  position: relative;
+}
+
+.reveal pre code {
+  font-family: var(--lec-mono);
+  font-size: var(--lec-font-code);
+  max-height: 620px;
+  line-height: 1.5;
+  background: transparent;
+  color: var(--lec-text);
+  padding: 1.1em 1.3em;
+  border-radius: 0;
+}
+
+/* ============================================================
+   UTILITY COLOUR / TYPE CLASSES
+   ============================================================ */
+
+.reveal .accent   { color: var(--lec-teal-deep); }
+.reveal .blue     { color: var(--lec-teal-deep); }
+.reveal .amber,
+.reveal .gold     { color: var(--lec-warning); }
+.reveal .muted,
+.reveal .grey     { color: var(--lec-muted); }
+.reveal .small    { font-size: 82%; }
+.reveal .large    { font-size: 210%; line-height: 1.12; }
+.reveal .plus,
+.reveal .positive { color: var(--lec-positive); font-weight: 700; }
+.reveal .minus,
+.reveal .negative { color: var(--lec-negative); font-weight: 700; }
+.reveal .neutral  { color: var(--lec-neutral); }
+
+.reveal .note {
+  font-size: 76%;
+  color: var(--lec-muted);
+  font-family: var(--lec-body);
+  font-style: italic;
+}
+
+/* Big friendly number */
+.reveal .metric {
+  font-family: var(--lec-display);
+  font-size: 3.1em;
+  font-weight: 800;
+  color: var(--lec-teal-deep);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  display: block;
+}
+.reveal .metric .unit { font-size: 0.4em; color: var(--lec-muted); font-weight: 600; }
+
+.reveal .metric-label {
+  font-family: var(--lec-mono);
+  font-size: 0.66em;
+  color: var(--lec-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-top: 0.35em;
+}
+
+/* ---- template-specific: learning objective box ---- */
+.reveal .objective {
+  background: var(--lec-teal-soft);
+  border: 1px solid var(--lec-teal);
+  border-radius: 14px;
+  padding: 0.9em 1.2em 0.9em 1.4em;
+  margin: 0.7em 0;
+  position: relative;
+}
+.reveal .objective::before {
+  content: '🎯 Today you will';
+  display: block;
+  font-family: var(--lec-display);
+  font-weight: 700;
+  font-size: 0.78em;
+  color: var(--lec-teal-deep);
+  letter-spacing: 0.01em;
+  margin-bottom: 0.35em;
+}
+.reveal .objective ul { margin-left: 1.4em; margin-bottom: 0; }
+.reveal .objective ul li::before { content: '✓'; color: var(--lec-teal-deep); font-size: 0.9em; top: 0; }
+
+/* ---- template-specific: highlighted key vocabulary term ---- */
+.reveal .keyterm {
+  font-family: var(--lec-display);
+  font-weight: 700;
+  color: var(--lec-ink);
+  background:
+    linear-gradient(transparent 58%, var(--lec-coral-soft) 58%);
+  padding: 0 0.12em;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   CALLOUT BOXES
+   ============================================================ */
+
+.reveal .callout,
+.reveal .warning,
+.reveal .success,
+.reveal .danger {
+  padding: 0.7em 1.1em;
+  margin: 0.7em 0;
+  border-radius: 0 12px 12px 0;
+  border-left: 5px solid var(--lec-teal);
+  background: rgba(42, 157, 143, 0.08);
+}
+.reveal .warning { border-left-color: var(--lec-warning); background: rgba(217, 154, 60, 0.1); }
+.reveal .success { border-left-color: var(--lec-positive); background: rgba(90, 157, 78, 0.1); }
+.reveal .danger  { border-left-color: var(--lec-negative); background: rgba(231, 111, 81, 0.1); }
+
+.reveal .cite {
+  border: 1px solid var(--lec-border);
+  border-radius: 10px;
+  background: var(--lec-bg-alt);
+  padding: 0.5em 1em;
+  margin: 0.7em 0;
+  font-size: 76%;
+  color: var(--lec-muted);
+}
+
+.reveal .box {
+  background: var(--lec-surface);
+  border: 1px solid var(--lec-border);
+  border-radius: 14px;
+  padding: 0.9em 1.1em;
+}
+
+.reveal .shadow {
+  border: 1px solid var(--lec-border);
+  border-radius: 14px;
+  box-shadow: 0 8px 26px rgba(44, 38, 32, 0.14);
+}
+
+/* ============================================================
+   COLUMNS & FLOATS
+   ============================================================ */
+
+.reveal .col {
+  width: 46%;
+  float: left;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.reveal .img-right {
+  float: right;
+  margin: 0.4em 0 1em 1.4em;
+  max-width: 42%;
+}
+
+/* ============================================================
+   TITLE SLIDE
+   ============================================================ */
+
+.reveal .slides section.title {
+  background: var(--lec-bg);
+  display: flex !important;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.reveal .slides section.title > header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2.4em 2.8em 0 2.8em;
+}
+.reveal .slides section.title > header::after { display: none; }
+
+.reveal .slides section.title .topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reveal .slides section.title .logo {
+  display: inline-block;
+  background: url('logo.svg') no-repeat left center;
+  background-size: contain;
+  height: 1.7em;
+  width: 11em;
+}
+
+.reveal .slides section.title .coords {
+  font-family: var(--lec-mono);
+  font-size: 0.58em;
+  color: var(--lec-muted);
+  letter-spacing: 0.06em;
+}
+
+.reveal .slides section.title .eyebrow {
+  font-family: var(--lec-mono);
+  font-size: 0.64em;
+  font-weight: 500;
+  color: var(--lec-coral);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: auto 0 0.7em 0;
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+.reveal .slides section.title .eyebrow::before {
+  content: '';
+  width: 2.4em;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--lec-coral);
+}
+
+.reveal .slides section.title h1 {
+  font-family: var(--lec-display);
+  font-weight: 800;
+  font-size: var(--lec-font-title-h1);
+  color: var(--lec-ink);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.reveal .slides section.title .subtitle {
+  font-size: 1em;
+  color: var(--lec-muted);
+  margin-top: 0.5em;
+  font-weight: 400;
+}
+
+.reveal .slides section.title .content {
+  flex: none;
+  padding: 1.1em 2.8em 2.6em 2.8em;
+}
+
+.reveal .slides section.title .authors {
+  font-size: 0.86em;
+  border-top: 1px solid var(--lec-border);
+  padding-top: 1em;
+  display: flex;
+  gap: 2.6em;
+}
+.reveal .slides section.title .authors .who { font-weight: 700; color: var(--lec-ink); font-family: var(--lec-display); }
+.reveal .slides section.title .authors .role {
+  font-family: var(--lec-mono);
+  font-size: 0.72em;
+  color: var(--lec-muted);
+  letter-spacing: 0.02em;
+  display: block;
+  margin-top: 0.18em;
+}
+
+.reveal .slides section.title footer { display: none; }
+
+/* ============================================================
+   SECTION SLIDE  (warm deep-teal divider — friendly breath)
+   ============================================================ */
+
+.reveal .slides section.section {
+  background: var(--lec-teal-deep);
+  background-image:
+    radial-gradient(circle at 82% 18%, rgba(231, 111, 81, 0.32), transparent 55%),
+    radial-gradient(circle at 12% 90%, rgba(255, 253, 248, 0.1), transparent 50%);
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reveal .slides section.section header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0 2.8em;
+  position: relative;
+  z-index: 1;
+}
+.reveal .slides section.section header::after {
+  content: '';
+  position: absolute;
+  left: 2.8em; bottom: -0.7em;
+  width: 3.2em; height: 5px;
+  border-radius: 3px;
+  background: var(--lec-coral);
+}
+
+.reveal .slides section.section .eyebrow {
+  font-family: var(--lec-mono);
+  font-size: 0.62em;
+  color: #ffe6dd;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.6em;
+}
+
+.reveal .slides section.section header h1 {
+  font-family: var(--lec-display);
+  font-weight: 800;
+  font-size: var(--lec-font-section-h1);
+  color: #fffdf8;
+  letter-spacing: -0.01em;
+  line-height: 1.06;
+}
+
+.reveal .slides section.section header p {
+  color: rgba(255, 253, 248, 0.82);
+  margin: 1.1em 0 0 0;
+  font-size: 0.82em;
+}
+.reveal .slides section.section header p a {
+  color: #fffdf8;
+  border-bottom-color: rgba(255, 253, 248, 0.4);
+}
+
+.reveal .slides section.section footer {
+  border-top-color: rgba(255, 253, 248, 0.16);
+  color: rgba(255, 253, 248, 0.55);
+}
+.reveal .slides section.section footer .slideno { color: #ffe6dd; }
+.reveal .slides section.section footer .slideno::before { color: rgba(255, 253, 248, 0.4); }
+
+.reveal .slides section.section > .content { padding: 0; }
+
+/* ============================================================
+   QUOTE SLIDE
+   ============================================================ */
+
+.reveal .slides section.quote {
+  display: flex !important;
+  flex-direction: column;
+}
+.reveal .slides section.quote > header { display: none; }
+.reveal .slides section.quote .content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.7em;
+}
+.reveal .slides section.quote blockquote {
+  border: none;
+  background: transparent;
+  font-style: normal;
+  font-weight: 600;
+  font-family: var(--lec-display);
+  color: var(--lec-ink);
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+  max-width: 82%;
+  margin: 0 auto;
+  padding: 0;
+}
+.reveal .slides section.quote blockquote::before {
+  content: '“';
+  display: block;
+  font-family: var(--lec-display);
+  font-size: 2.6em;
+  color: var(--lec-coral);
+  line-height: 0.4;
+  margin-bottom: 0.18em;
+}
+.reveal .slides section.quote .attrib {
+  font-family: var(--lec-mono);
+  font-size: 0.5em;
+  color: var(--lec-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 1.4em;
+}
+.reveal .slides section.quote footer { position: relative; }
+
+/* ============================================================
+   MODIFIERS
+   ============================================================ */
+
+.reveal .slides section.centered .content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.reveal .slides section.fullspace .content { padding: 0; }
+
+/* ============================================================
+   DIAGRAM HELPERS (styled HTML boxes & arrows, no images)
+   ============================================================ */
+
+.reveal .flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  flex-wrap: wrap;
+  margin: 0.8em 0;
+}
+.reveal .node {
+  font-family: var(--lec-mono);
+  font-size: 0.82em;
+  background: var(--lec-surface);
+  border: 2px solid var(--lec-teal);
+  color: var(--lec-ink);
+  border-radius: 12px;
+  padding: 0.55em 0.9em;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(44, 38, 32, 0.07);
+}
+.reveal .node.coral { border-color: var(--lec-coral); }
+.reveal .node.bucket {
+  background: var(--lec-bg-alt);
+  border-style: dashed;
+  min-width: 3em;
+}
+.reveal .arrow {
+  font-family: var(--lec-display);
+  font-weight: 700;
+  font-size: 1.4em;
+  color: var(--lec-coral);
+  line-height: 1;
+}
+
+/* vertical-stack hint on nested decks */
+.reveal .slides section.stack > section:first-of-type footer .slideno::after {
+  content: ' ▾';
+  color: var(--lec-faint);
+}

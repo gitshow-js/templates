@@ -1,0 +1,20 @@
+{
+    "id": "editorial_sample",
+    "title": "The Slow Web",
+    "author": "Marisol Vance <hello@grainquarterly.example>",
+    "lang": "en",
+    "template": {
+        "name": "editorial",
+        "properties": {
+            "footer": "GRAIN №04 · Craft"
+        }
+    },
+    "contents": [
+        "00title.md",
+        "10feature.md",
+        "20spread.md",
+        "30numbers.md",
+        "40pull.md",
+        "99colophon.md"
+    ]
+}
