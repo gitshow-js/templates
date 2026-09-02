@@ -887,3 +887,16 @@ html.print-pdf .reveal .slides section .fragment {
   content: ' ▾';
   color: var(--dx-faint);
 }
+
+/* ============================================================
+   PDF EXPORT
+   ============================================================ */
+
+/* Reveal's print stylesheet forces `display: block !important` on every
+   <section>, which breaks the flex-based slide layouts above. Re-assert them
+   with a higher-specificity selector so `?print-pdf` matches the screen. */
+html.print-pdf .reveal .slides section.title,
+html.print-pdf .reveal .slides section.section,
+html.print-pdf .reveal .slides section.quote {
+  display: flex !important;
+}
